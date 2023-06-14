@@ -1,6 +1,7 @@
 import json
 
-PUZZLES_JSON = 'puzzles.json'
+PUZZLES_JSON = 'intermediates/puzzles.json'
+EXTRAS_JSON = 'intermediates/extras.json'
 TEX_FILE = 'book.tex'
 
 def create_latex_for_puzzle(puzzle: dict):
@@ -17,6 +18,14 @@ def create_latex_for_puzzle(puzzle: dict):
 if __name__ == "__main__":
     fp = open(PUZZLES_JSON, "r")
     puzzles = json.load(fp)
+    fp.close()
+
+    efp = open(EXTRAS_JSON, "r")
+    extras_puzzles = json.load(efp)
+    efp.close()
+
+    puzzles : list
+    puzzles.extend(extras_puzzles)
 
     qfp = open(TEX_FILE, "w")
     qfp.write(
@@ -45,5 +54,4 @@ if __name__ == "__main__":
 
     qfp.write("\end{enumerate}")
 
-    fp.close()
     qfp.close()
