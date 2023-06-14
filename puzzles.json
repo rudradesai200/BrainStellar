@@ -1,0 +1,946 @@
+[
+  {
+    "id": 1,
+    "title": "Rolling the bullet",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "Two bullets are loaded into a gun's round barrel consecutively. The barrel has a capacity of 6. The gun is fired once, but no bullet is shot. Does rolling the barrel (shuffling) before next shot increase the probability of firing a bullet?",
+    "Hint": "Since the bullets are loaded consecutively, the next shot is also constrained.",
+    "Answer": "Yes, shuffling increases the probability of firing a bullet from $25\\%$ to $33.\\bar{3}\\%$)",
+    "Solution": "Initial Misstep: If the two bullets are randomly put instead of consecutively, then, after firing one empty shot, there are $2$ bullets and $5$ total slots. The probability would be $2/5 = 40\\%$, but that's not the case here.\nCorrect step: The probability of firing a bullet without a shuffle is $1/4 = 25\\%$. To understand this, imagine that the firing pin was on one of the empty slots $(3, 4, 5, 6)$, and the first shot was taken, but no bullet was fired. Now assumming that the barrel rotates clockwise, the pin will move to one of these slots: $(2, 3, 4, 5)$. Out of these four slots, only the slot $(1)$ has a bullet. Hence probability of firing a bullet is $1/4 = 25\\%$.\nNote that the same is true in anti-clockwise direction.\nAfter the shuffle, the state is reset. There are $6$ total slots with $2$ bullets, the probabilty of firing a bullet after a shuffle is $2/6 = 1/3 \\approx 33\\% $.\nThus, shuffling does increase the probability of firing a bullet (from $25\\%$ to $33\\%$)"
+  },
+  {
+    "id": 2,
+    "title": "Pirates \\& The Treasure",
+    "difficulty": "easy",
+    "category": "strategy",
+    "Question": "Five pirates need to divide 100 Gold Coins. Pirates have a hierarchy, from Level 1 to level 5. The highest level pirate is the leader. The leader proposes a plan to distribute the gold and all the pirates vote on it (including the leader). If at least 50\\% of the pirates agree on the plan, the gold is split according to the proposal. If not, level-5 pirate is kicked from the ship, and the level-4 pirate now proposes a new plan. This process continues until a proposal is accepted. All pirates are extremely smart and extremely greedy. How does level-5 Pirate divide the treasure?",
+    "Hint": "Here n=5, think in terms of what happens if n=1,2,3...",
+    "Answer": "Coin distribution is: (98, 0, 1, 0, 1) from levels (5, 4, 3, 2, 1) respectively",
+    "Solution": "Let the pirates be called P5, P4, P3, P2, P1. P5 is the leader.\nLet's study a simpler case with only 2 pirates. P2 can propose to take all the 100 gold coins. Even if P1 votes against this, P2 will vote in favor and the proposal will still be accepted (50\\% acceptance) leaving P1 with zero coins. The distribution is (100, 0) for levels (2, 1) respectively.\nNow let's look at the case with 3 pirates. P3 knows that if this proposal is not accepted, then P2 will get all the gold and P1 will get nothing. So P3 can bribe P1 with one gold coin. P1 knows that one gold coin is better than zero, and hence votes in favor of this proposal. Therefore, P3 can propose the following distribution {Level 3 pirate: 99, Level-2: 0, Level-3: 1}. Since pirate 1 and 3 will vote in favor, this proposal will be accepted. The distribution is (99, 0, 1) for levels (3, 2, 1) respectively.\nIf there are 4 pirates, P4 can extend this pattern by bribing those who would get nothing in 3-pirates case, to ensure their votes. So the distribution will be (99, 0, 1, 0) for levels (4, 3, 2, 1) respectively, this will ensure that P2 will vote in favor and with the help of self voting (P4), we have 50\\% votes to accept this proposal.\nSimilarly, P5 can bribe P3 and P1 pirates because they get nothing if the proposal is rejected, as P4 was giving them nothing. Hence, at level-5, the proposal is (98, 0, 1, 0, 1). This proposal will get accepted and provide the maximum amount of gold to the leader.\nThis puzzle gives a basic idea of game theory and dynamic programming."
+  },
+  {
+    "id": 3,
+    "title": "The Returning Explorer",
+    "difficulty": "easy",
+    "category": "discrete",
+    "Question": "An explorer walks:\n1 mile South\n1 mile East\n1 mile North.\nAnd finds themselves back at the starting point. The explorer spots a bear, what is the color of the bear?",
+    "Hint": "The surface of the Earth is curved, not flat.",
+    "Answer": "White"
+  },
+  {
+    "id": 4,
+    "title": "Which Switch?",
+    "difficulty": "easy",
+    "category": "general",
+    "Question": "There is a light bulb inside a room and three switches outside. All switches are currently in off state and only one switch controls the light bulb. You may turn any number of switches on or off any number of times you want. How many times do you need to go into the room to figure out which switch controls the light bulb?",
+    "Hint": "A lighted bulb also emits heat and gets hot slowly (not instantaneously!)",
+    "Answer": "1",
+    "Solution": "The bulb gets hot slowly when turned on. Turn on the switch \\#$1$ for 10 minutes, turn it off and turn on the switch \\#$2$ and get into the room. There are $3$ possible cases.\nIf the bulb is on, then switch \\#$2$ controls the bulb.\nIf the bulb is off, but hot, then switch \\#$1$ controls the bulb.\nIf the bulb is off and cool, then switch \\#$3$ controls the bulb.\nThus, we can infer the switch that controls the bulb in one entry.\nFollow up question\nWhat if there were $4$ switches?\nFollow up answer\nAssuming that modern bulbs heat up slowly, we can infer this in one entry.\nTurn on the switch \\#$1$ and \\#$2$ keeping others off. Wait for 10 minutes. Turn off \\#$2$, turn on \\#$3$, and quickly enter the room. Following are the possible states and the corresponding switch that controls the bulb.\nState\nInferred Switch\non and hot\n$\\rightarrow$\n1\noff but hot\n$\\rightarrow$\n2\non but cool\n$\\rightarrow$\n3\noff and cool\n$\\rightarrow$\n4\nThe following table shows this information in a grid format:\nOn\nOff\nHot\n1\n2\nCold\n3\n4"
+  },
+  {
+    "id": 5,
+    "title": "Lucky Candy",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "How do you place 50 good candies and 50 rotten candies in two boxes such that if you choose a box at random and take out a candy at random, it better be good!\nWe need to maximize the probability of getting a good candy when selecting a random box and a random candy from it.",
+    "Hint": "Placing all bad in 1 box and all good in another will give the probability of 0.5, which is not the maximum.",
+    "Answer": "Place 1 good candy in one box and all the remaining (49 good and 50 rotten candies) in the second box.",
+    "Solution": "Place 1 good candy in one box and all remaining (49 good and 50 rotten candies) in the second box.\nThis will give a probability of $(1/2) * 1 + (1/2) * (49/99) = 74.\\bar{74}\\%$"
+  },
+  {
+    "id": 6,
+    "title": "All Girls World?",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "In a world where everyone wants a girl child, each family continues having babies till they have a girl. What do you think will the boy-to-girl ratio be eventually?\nAssuming probability of having a boy or a girl is the same and there is no other gender at the time of birth.",
+    "Answer": "1:1",
+    "Solution": "Suppose there are $N$ couples. First time, $N/2$ girls and $N/2$ boys are born. $N/2$ couples retire, and rest half try for another child.\nNext time, $N/4$ couples give birth to $N/4$ girls and $N/4$ boys. Thus, even in the second iteration, the ratio is $1:1$. It can now be seen that this ratio will always remain the same, no matter how many times people try to give birth to a favored gender."
+  },
+  {
+    "id": 7,
+    "title": "Tigers \\& The Sheep",
+    "difficulty": "easy",
+    "category": "strategy",
+    "Question": "Hundred tigers and one sheep are put on a magic island that only has grass. Tigers can live on grass, but they want to eat sheep. If a Tiger bites the Sheep then it will become a sheep itself. If 2 tigers attack a sheep, only the first tiger to bite converts into a sheep. Tigers dont mind being a sheep, but they have a risk of getting eaten by another tiger. All tigers are intelligent and want to survive. Will the sheep survive?",
+    "Hint": "Instead of 100, think of 1 or 2 tiger's case.",
+    "Answer": "Sheep survives!",
+    "Solution": "If there is 1 tiger, then it will eat the sheep because he does not need to worry about being eaten. Sheep will not survive.\nIf there are 2 tigers, both of them knows that if one eats the Sheep, the other tiger will eat him. So, the sheep will survive.\nIf there are 3 tigers, then they each of them knows that if one tiger eats up the sheep, then Iceland will be left with 1 sheep and 2 tigers and as shown in the previous case, the sheep will survive. Hence each tiger will try to eat up the sheep. The sheep will not survive.\nIf there are 4 tigers, then the sheep will survive.\nAnd so on....\nSo, If there are even number of tigers the sheep will survive, else it will die. Hence, if there are 100 tigers the sheep will survive."
+  },
+  {
+    "id": 8,
+    "title": "Duck \\& Fox",
+    "difficulty": "easy",
+    "category": "strategy",
+    "Question": "A duck is sitting at the center of a circular lake. A fox is waiting at the shore, not able to swim, wishing to eat the duck. The Fox can move around the whole lake at a speed four times the speed at which the duck can swim. The duck can fly, but only once it reaches the shore of the lake, it can't fly from the water directly. Can the duck always reach the shore without being eaten by the fox?\nNote: This is an old duck, and cannot take a flight while swimming. The duck cannot submerge in the water.",
+    "Hint": "The fox is greedily chasing the duck. If the duck's angular speed is (somehow) more than the fox, there can be a phase lag.",
+    "Answer": "At a radius of slightly less than $R/4$, the duck can swim in circles, forcing the fox to run around. Once the duck is at a phase of $\\pi$ from the fox it starts swimming towards the shore and flies away.",
+    "Solution": "This is a classic problem involving geometry and relative speed, often referred to as the \"Duck and Fox Problem\". Here's the approach:\nSwim in Circles: The duck begins by swimming in a circle with a radius of $r $<$ R/4$ where $R$ is the radius of the lake. The center of this circle is the same as that of the lake. The fox is four times as fast as the duck. By swimming in a small circle, the duck can start creating an angular separation between itself and the fox.\nForce the Fox to Run: Since the fox is trying to chase the duck, it will continue to run around, trying to move to the point nearest to the duck but on the shore. As the duck goes around slightly faster, the fox lags behind. Eventually, the duck will be at a point where the fox is directly across the lake from it.\n\nWait for the Right Moment: The duck continues swimming in its smaller circle until the fox is straight across the lake from it. At this point, the duck and fox are separated by half the circumference of the lake, a distance that the fox has to cover to reach the duck if it heads straight for the shore.\nHead for the Shore: While standing directly opposite, the duck can now swim straight to the shore. Duck has to travel around $R \\cdot 3/4$ distance, while the fox has to travel $\\pi R$. Given the ratio of their speeds, it will take $3 R$ and $3.14 \\cdot R$ units of time respectively. Hence the duck will have a few extra moments to start the flight.\nEscape: Reaching moments before the fox, the duck can now fly away to safety.\nLimits of $r$\nLet us also formalize the limits of the choice of $r$.\nIt is slightly less than $R/4$, to create a phase lag\n$r $<$ R/4$ (to create a phase lag)\nAlso, in the end, the remaining time to reach the shore should be less for the duck, than the fox.\n$\\dfrac{(R-r)}{1v} $<$ \\dfrac{\\pi R}{4v}$ (where $v$ is the speed.)\nSolving these two equations gives:\n${R} \\cdot (1 - \\dfrac{\\pi}{4}) $<$ r $<$ \\dfrac{R}{4}$\nHence, the inner circle can have a radius between $21.5\\%$ to $25\\%$ of $R$"
+  },
+  {
+    "id": 9,
+    "title": "The Plane in the Wind",
+    "difficulty": "easy",
+    "category": "general",
+    "Question": "An airplane flies in a straight line from airport $A$ to airport $B$, and then back in a straight line from $B$ to $A$. It travels with a constant engine speed and there is no wind. Will the total travel time for the same round trip be greater, less or the same if, throughout both the flights a constant wind blows from $A$ to $B$?",
+    "Hint": "Wind will always slow down the journey!",
+    "Answer": "The more the wind blows, the total time will be higher even though one of the journeys is faster.",
+    "Solution": "Intuition\nThe time during which the plane's speed is boosted is shorter than the time during which it is slowed down, so the over all effect is of slow-down.\nMaths\nSuppose the wind blows at a speed of $w$ from $A$ to $B$, and the plane's engine is capable of a steady speed of $s$ (without any wind). Ignore acceleration and de-acceleration.\nSuppose the distance is $d$, the total time will be $2d/s$ without any wind.\nSpeed from $A$ to $B$ is $(s + w)$ and $B$ to $A$ is $(s - w)$\n$t = \\dfrac{d}{s+w} + \\dfrac{d}{s-w}$\n$= d ( \\dfrac{2 s}{s^2 - w^2})$\n$= \\dfrac{2d}{s - (w^2/s) } $>$ \\dfrac{2d}{s}$\nFor $0 $<$ w $<$ s$, the denominator in the first term is less than $s$, and therefore the total time is greater than the time without the wind.\nFootnotes\nConsider the edge case, where the plane's speed is the same as the wind. In one direction, the plane's speed is doubled, while in the other, it becomes zero! (i.e. it takes an infinite amount of time to finish the journey!)"
+  },
+  {
+    "id": 10,
+    "title": "Burning Cords",
+    "difficulty": "easy",
+    "category": "general",
+    "Question": "You are given two cords that both burn in exactly one hour, not necessarily at a uniform rate. How should you light the cords to determine a time interval of exactly 15 minutes?",
+    "Hint": "Because this lacks uniformity, we cannot break the cord in half, and expect it to burn in half the time. But we can burn both ends of a cord to finish it in half the time it would have taken otherwise!",
+    "Solution": "First, let's try to measure thirty minutes. To do that, we can burn both ends of a cord. Even if it burns non-uniformly, it will still finish in exactly 30 minutes.\nTo measure 15 minutes, burn the first cord at one end and the second cord at both ends. Half an hour later, when the second cord finishes burning, the first cord has exactly 30 minutes of length left. Now we can burn the other end of the first cord, and it shall finish in exactly 15 minutes.\nFollow-up Question\nInstead of having two cords, what if you only had one cord, how would you measure 15 minutes?\nFollow-up Answer\nBreak the cord into approximately half, and burn these two cords from both of their ends. If both these cords finish burning together, that means exactly 15 minutes have passed. If any one of these cords finishes first, break the other cords from approximately the middle, and further burn all ends of these little cords. Continuing this way theoretically leads to exactly 15 minutes!"
+  },
+  {
+    "id": 11,
+    "title": "Pair of Socks",
+    "difficulty": "easy",
+    "category": "discrete",
+    "Question": "There are 10 black socks and 10 red socks in a cupboard. Your task is to draw a few socks at random, without looking, such that you get at least one matching pair (single color). What's the least number of socks that you need to draw?\nAssume that there is no left-right distinction in these socks.",
+    "Hint": "Pigeonhole principle",
+    "Answer": "3",
+    "Solution": "The Pigeonhole Principle states that if there are $(N+1)$ pigeons to fit in $N$ holes, at least one hole will have $2$ or more pigeons. Hence, if you pick $3$ socks (pigeons) from $2$ colors (holes), at least one color (hole) will have $2$ or more socks (pigeons), i.e. a pair is guaranteed with either red or black color.\nIn general, if there are $N$ different colored socks, then we would draw $N+1$ socks to ensure at least one matching pair."
+  },
+  {
+    "id": 12,
+    "title": "Antipodal points",
+    "difficulty": "easy",
+    "category": "discrete",
+    "Question": "Prove that there are two opposite points on the Earth's surface that have the same temperature.\nAssume that the temperature varies continuously over the surface.",
+    "Hint": "Consider the difference in temperature between two opposite points.",
+    "Solution": "The motivation is that the temperature is a continuous function, and cannot keep increasing as we go around a circle.\nConsider any great circle, like the Equator.\nSuppose $t(\\theta)$ is the temperature at the point $\\theta$.\nDefine $f(\\theta) = t(\\theta)-t(\\theta+\\pi)$\nNote that $f(0)=t(0)-t(\\pi)$\n$f(\\pi)=t(\\pi)-t(2 \\pi) = t(\\pi)-t(0) = -f(0)$\nEither both $f(0)$ and $f(\\pi)$ are $0$ or one of them is positive and the other is negative.\nUsing Mean Value Theorem, $f(\\theta)$ must be zero for some point between $0$ and $\\pi$.\nThus, there will always be a pair of two opposite points at the same temperature.\nTrivia\nThere are an uncountably infinite number of such pairs. Consider two random opposite points, such that their temperature is not the same. Let us call these two points \"poles\". We can create an uncountably infinite number of distinct circles passing through these two poles, by slightly rotating on an axis passing through the poles. Each circle will give a unique pair of antipodal points, that will not coincide with the poles.\nBorsuk-Ulam Theorem states that every continuous function from an n-sphere into Euclidean n-space maps some pair of antipodal points to the same point. Here, two points on a sphere are called antipodal if they are in exactly opposite directions from the sphere's center.\nAt $n=1$, there exist two opposite points on the circle where the temperature is the same.\nAt $n=2$, at any moment, there is always a pair of antipodal points on the Earth's surface with equal temperatures and equal barometric pressures.\nThe proof is easy for $n=1$ using MVT as shown above.\nA video explanation by singingbanana is here. An alternate version of this puzzle is the Mountain Man"
+  },
+  {
+    "id": 13,
+    "title": "Half Time",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "The probability of having accidents on a road in one hour is $3/4$. What is the probability of accidents in half an hour?",
+    "Hint": "The joint probability of no events in two intervals of half an hour each is the same as the probability of no event in one hour.",
+    "Answer": "1/2",
+    "Solution": "Probability of no accident in $1$ hour = P(no accidents in the first half an hour ) * P(no accidents in the next half an hour)\n$\\implies 1 - 3/4 =p^2 \\implies p=1/2$\nHence the probability of an accident in half an hour $=1 - 1/2 = 1/2$\nFor those who are more inclined towards the inner wirings\nAssume that the disjoint time intervals are independent, the probability of no accidents in $[0, 2t)$ = the probability of no accidents in $[0,t)$ AND $[t,2t)$\nDefine $p(t)$ = probability of an accident in an interval of $t$ hours\n$\\implies 1-p(2t) = (1-p(t)) \\cdot (1-p(2t - t)) = (1 - p(t))^2$\nGiven that $p(1h)=3/4 \\implies p(0.5h)=1/2$ and $p(2h)=15/16$.\nThe way we have defined $p(t)$ above, it is the probability that at least $1$ accident happens in time interval $t$. Thus, as $t$ increases, $p(t)$ also increases.\nTrivia\nThe assumption for the independence of disjoint intervals is called Memorylessness\nThe probability of having at least one accident = 3/4. But there can be any number of accidents. Typically, it follows a Poisson Distribution, with parameter $\\lambda =$ average number of accidents in that period.\nThe waiting time for the next accident is a continuous random variable. Typically it follows an exponential distribution, with the parameter $\\beta =$ average waiting time for the next event.\nThe occurrence rate ($\\lambda$) and the average waiting time ($\\beta$) are related as $\\beta = 1/\\lambda$. This means that if on average, there are 3 meteorites per hour, then on average we wait for (1/3) hours to see the next meteorite."
+  },
+  {
+    "id": 14,
+    "title": "Monty Hall Problem",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "Suppose you're on a game show, and you're given the choice of three doors: Behind one door is a car; behind the others, goats. You pick a door, say No. 1, and the host, who knows what's behind the doors, opens another door, say No. 3, which has a goat. Now, do you want to pick door No. 2? What is the probability to win the car if you switch?",
+    "Hint": "The host always opens a door with a goat.",
+    "Answer": "2/3",
+    "Solution": "The probability that your initial choice did not have a car is indeed $2/3$.\nInitial Misstep:\nAfter one door is opened, there are exactly two doors left, and one of them has a car. So the probability that the car is behind either door is $1/2$.\nThis is incorrect because the host knows which door has a car and which door has a goat. The host always opens a door with a goat.\nCorrect Solution:\nThe following table shows which Door the host might open. Assume that the car is behind Gate \\#1, and we randomly choose one door.\nInitial choice:\n  Door \\#1  \n  Door \\#2  \n  Door \\#3  \nReality\nCar\nGoat\nGoat\nHost opens:\n\\#2 or \\#3\n\\#3\n\\#2\nRemaining:\n\\#3 or \\#2\n\\#1\n\\#1\nGood to switch:\nNo\nYes\nYes\nWe see that at the end, the remaining unopened door is Door \\#1 if we start with Door \\#2 or Door \\#3.\nThis means that in 2 out of 3 cases, we started with the incorrect Door (\\#2 or \\#3) and we got the option to switch with the correct door at the end (\\#1).\nSo you should switch to the other door, and win the car with a probability of $2/3$\nThe probability of being initially wrong is the same as the probability of being correct after switching. We can generalize this to $n$ doors.\nThe probability of winning the game by switching after the host has opened $n-2$ doors is $(1 - 1/n)$"
+  },
+  {
+    "id": 15,
+    "title": "Prisoner's Hat",
+    "difficulty": "easy",
+    "category": "strategy",
+    "Question": "One hundred prisoners are lined up, facing one direction and assigned a random hat, either red or blue. Each prisoner can see the hats in front of them but not behind. Starting with the prisoner at the back of the line and moving forward, they must each, in turn, say only one word which must be \"red\" or \"blue\". If the word matches their hat color they are released, if not, they are kept imprisoned. They can hear each others' answers, no matter how far they are on the line, but they do not hear the verdict (whether the answer was correct). A friendly guard warns them one night before, giving them enough time to come up with a strategy.\nHow many prisoners can be freed using the best strategy?\nAssume that there is an unknown number of red \\& blue hats.",
+    "Hint": "The prisoner at the back can count the number of each color and convey some information to the next.",
+    "Answer": "99 of the 100 prisoners can be freed, and 1 has a 50:50 chance of freedom.",
+    "Solution": "We can number prisoners from 100 to 1, with 100 being the last person in the line. Prisoners agree that if the $100^{\\text{th}}$ person will say \"red\" if there are an even number of \"red\" hats visible on the prisoners 1 to 99, and blue otherwise. This way, prisoner number 99 can look ahead and count the red hats. if they add up to an even number and the number 100 said red, then 99 must be wearing a blue hat. if they add up to an even number and number 100 said blue, signaling an odd number of red hats, number 99 must also be wearing a red hat.\nSimilarly, number 98 knows that 99 said the correct hat, and so uses that information along with the 97 hats in the front to figure out their own hat's color. This can continue till the first prisoner.\nThis strategy will free 99 prisoners. But the $100^{\\text{th}}$  prisoner has to rely on luck and has a 50:50 chance of being right.\nNotes:\nIf a prisoner decides to give an incorrect answer on purpose, then all the successive prisoners end up giving an incorrect answer. Unless there is another corrupt prisoner who inverts the parity.\nIn an alternative universe, the friendly guard informs the prisoners that both colors are even. All one hundred prisoners can be freed."
+  },
+  {
+    "id": 16,
+    "title": "Knight and Knave",
+    "difficulty": "easy",
+    "category": "strategy",
+    "Question": "A traveler meets a pair of twins at a fork in the road: one path is correct and one incorrect. One of the twins always tells the truth (knight), and the other one always lies (knave). Which single question can the traveler ask one of the twins to determine the correct path?",
+    "Hint": "Ask one twin about the other twin's knowledge!",
+    "Solution": "This can be constructed in many ways.\nThe traveler can ask, \"Would the other twin agree that the road on the left is correct?\" The answer is guaranteed to be 'Yes' if and only if the road on the right is correct.\nThe traveler can also ask, \"If I were to ask you whether the road on the right is correct, would you say 'Yes'?\", both the twins tell yes only if the right path is indeed correct."
+  },
+  {
+    "id": 17,
+    "title": "Water \\& Wine",
+    "difficulty": "easy",
+    "category": "general",
+    "Question": "There are two beakers, one containing water, the other wine (equal volumes). A certain amount of water is transferred to the wine, then the same amount of the mixture is transferred back to the water. Is there now more water in the wine than there is wine in the water?",
+    "Answer": "Equal!",
+    "Solution": "The main point is that the final volumes of mixture liquids are equal. This means in jar A, volume of water + wine is same as that in jar B. Assume original volume as L. Suppose final volume in jar A is x for water and (L-x) for wine. This implies that jar B has x amount of wine and (L-x) of water. This proves that there are equal amounts of water in the wine jar and wine in the water jar."
+  },
+  {
+    "id": 18,
+    "title": "100 Light bulbs",
+    "difficulty": "easy",
+    "category": "general",
+    "Question": "Light bulbs are numbered 1 to 100, and kept off initially. First person comes and toggles all the bulbs which are multiple of 1, i.e. he switches all bulbs to on. Second person toggles all multiples of 2, i.e he turns of even bulbs. Third person comes and toggles all multiples of 3. This process continues till 100 persons pass. After this, how many bulbs are  ON?",
+    "Hint": "Consider the bulb number 9.",
+    "Answer": "10 bulbs",
+    "Solution": "We notice that for  a perfect square (like 9), the number of factors are always odd, for example:\nNumber of factors of (16) = \\# [1,2,4,8,16] = 5\nNote that for non-square numbers, factors are even.\nAs a factor toggles the state of a bulb, bulb number 9 will be toggled by 1,3 \\& 9.  Thus bulb number 9 will switch ON, OFF, ON respectively. Note that odd number of factors cause bulb 9 to be ON at the end.\nWe note that for odd number of factors is the cause of bulb staying on at the end. Similarly every squared digit bulb will be switched on, and rest will remain off after all factors toggle. Thus the bulbs 1,4,9....81,100 are ON, at the end. Hence 10 bulbs are on."
+  },
+  {
+    "id": 19,
+    "title": "Getting fair result from unfair coin",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "We have a weighted coin which shows a Head with probability p, (0.5$<$p$<$1). How do we get a fair toss from this? That is, how do we toss this coin in such a way that we can have probability of winning = loosing = 50\\%?",
+    "Hint": "Clearly we cannot have a fair toss in a single flip of this coin. But by tossing this coin 2 times, we can assign the outputs to \"win\" or \"loose\", such that we have a 50\\% chance for both.",
+    "Answer": "Toss 2 times, mapping HT to \"win\", TH to \"loose\" and repeat the process otherwise.",
+    "Solution": "Toss the coin twice. If consecutive Heads-Tails appears (HT), we \"win\". In case of (TH), we \"loose\". If (TT) or (HH) appears, repeat the process. Probability of infinite repetition (p * p * .....) + (1-p) * (1-p) * .... = 0 + 0 = 0;\nProbability of H-T and T-H is equal hence it's fair now.\nI proposed a faster method, \"lets keep tossing the coin to form a sequence of H's \\& T's . I win if HT appears before TH\" . Was I bluffing?\nActually yes, the probability of HT before TH is just p in second game."
+  },
+  {
+    "id": 20,
+    "title": "Waiting for the Train",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "Spiderman has two girlfriends, Mary Jane \\& Gwen Stacy. After every mission, he rushes to the central subway. Since spidey is a nice man, much impartial, he takes which-ever train arrives first. From subway, one series go towards Mary's place, and another series move towards Stacy. Trains from either series appear every 10 minutes. Also, Peter Parker sticks with the train which arrives first.\nBut somehow, he notices that he is spending 9 times more dates with Mary Jane than Stacy. Can you explain why?",
+    "Hint": "Do you think ratio should be 50:50? Do you think the gap between each train's arrival is 5 minutes? Can a train arrive always earlier than the other and still be at every 10 minutes gap?",
+    "Solution": "Train to Mary Jane's place comes at say times 0 and 10, while the train to Stacy's place comes at times 1 and 11. So 9/10 times, train to Mary Jane's place is appearing earlier."
+  },
+  {
+    "id": 21,
+    "title": "2 Eggs",
+    "difficulty": "easy",
+    "category": "strategy",
+    "Question": "An Egg breaks only if dropped from above a threshold floor, within this 100 story building. Every time you drop the egg, it is counted an attempt. You are given two eggs, find an algorithm to deduce the threshold floor, with minimum number of attempts in worst case!",
+    "Hint": "If we had only 1 egg, we would go linearly from 1 to 100. Having an extra egg gives an opportunity to jump (skip some floors from testing). When 1st egg breaks, second egg moves linearly. Think why first egg should not move in constant jumps, but rather decreasing jumps! This will give 14 steps in the worst case.",
+    "Answer": "It can be done in 14 steps in the worst case.",
+    "Solution": "A solution for minimum steps in worst case is the smallest integer greater than or equal to the positive solution of n(n+1)/2=100...which gives 14....\nstart at 14th floor, if egg breaks start linearly from 1, if it does not break drop the egg from 14+13 = 27th floor, and so on....\nMy friend was asked only one puzzle in his interview, \"3 eggs\". He got the job."
+  },
+  {
+    "id": 22,
+    "title": "e^Pi or Pi^e",
+    "difficulty": "easy",
+    "category": "general",
+    "Question": "Without explicitly calculating, find out which is bigger: $e^\\pi$ or $\\pi^e$?",
+    "Hint": "One method would be to expand $e^x$, another would be to observe the derivative of a special function",
+    "Answer": "$e^\\pi$",
+    "Solution": "Initial Misstep\n$e^\\pi \\approx 23.14; \\pi^e \\approx 22.46$, hence $e^\\pi$ is bigger.\nBut this is not a valid method. We need to compare the two numbers without calculating them.\nMethod 1\nSince $e^x = 1 + x + \\dfrac{x^2}{2!} + \\ldots$, we have $e^x $>$ 1+x$.\nLet $x = (\\dfrac{\\pi}{e} -1)$ and solve:\n$\\implies e^{\\pi/e - 1} $>$ 1 + \\dfrac{\\pi}{e} - 1$\n$\\implies \\dfrac{e^{\\pi/e}}{e} $>$ \\dfrac{\\pi}{e}$\n$\\implies e^{\\pi/e}$ $>$ $\\pi$\n$\\implies e^\\pi$ $>$ $\\pi^e$ (raised to power $e$ on both sides)\nHence $e^\\pi$ is bigger.\nMethod 2\nSuppose $\\sim$ denotes the relation between the two terms.\n$e^\\pi \\sim \\pi ^ e \\iff e^{1/e} \\sim \\pi^{1/\\pi}$ (raised to power $1/{e\\pi}$ on both sides)\nNote the function $f(x) = x^{1/x}$\nTo investigate how this function behaves, we need to take its derivative. But that's difficult.\nConsider $g(x) = \\ln(f(x)) =  \\dfrac{\\ln(x)}{x}$\nDifferentiate using product rule:\n$(u \\cdot v)' = u' \\cdot v + u \\cdot v'$\nwhere $u=\\ln(x), v = 1/x, u'=1/x, v' = -1/x^2$\n$g'(x) = \\dfrac{1}{x} \\cdot \\dfrac{1}{x} + \\ln(x) \\cdot \\dfrac{-1}{x^2}$\n$g'(x) = \\dfrac{1-\\ln{(x)}}{x^2}$\nThe derivative $g'$ is negative if $\\ln(x) $>$ 1$\n$\\implies g$ is decreasing for $x $>$ e$\n$\\implies f$ is decreasing for $x $>$ e$ because $\\ln$ is a monotonic transformation.\n$\\implies f(e) $>$ f(\\pi)$ because $e$<$\\pi$\n$\\implies e^{1/e} $>$ \\pi^{1/\\pi}$\n$\\implies e^\\pi $>$ \\pi^e$\nThus $e^\\pi$ is bigger.\nNotes:\nThis puzzle is kept in the \"easy\" category because it is easy to ask. The answer is also \"easy\" to verify, using a calculator. But when solving, it is a hard puzzle.\nHere's a plot of $f(x)=x^{1/x}$\nThis is a common question in placement tests. It would be a good idea to memorize that $f(x) = x^{1/x}$ is decreasing in the range $x $>$ e$. Using this, we can prove other variants.\nrelation\n  \nusing  function\n$e^{\\pi}$\n$$>$$\n$\\pi^{e}$\n$f(x)$ at $x=e, \\pi$\n$e^{2 \\pi}$\n$$>$$\n$\\pi ^ {2e}$\n$f^2(x)$ at $x=e, \\pi$\n$e^{\\pi^2}$\n$$>$$\n$\\pi ^ {e^2}$\n$\\sqrt{f(x)}$ at $x=e^2, \\pi^2$\n$e^{\\sqrt{\\pi}}$\n$$<$$\n$\\pi ^ {\\sqrt{e}}$\n$f(x)^2$ at $x=\\sqrt{e}, \\sqrt{\\pi}$"
+  },
+  {
+    "id": 23,
+    "title": "Shooting in Circle",
+    "difficulty": "easy",
+    "category": "general",
+    "Question": "1024 pirates stand in a circle. They start shooting alternately in a cycle such that the 1st pirate shoots the 2nd, the 3rd shoots the 4th and so on. The pirates who got shot are eliminated from the game. They continue in circles, shooting the next standing pirate, till only one pirate is left. Which position should someone stand to survive?",
+    "Hint": "1024 is a power of 2. Try to find a pattern using smaller powers of 2.",
+    "Answer": "1",
+    "Solution": "Let us try a few numbers.\nFor $n=2$, the $1^{\\text{st}}$ person survives by shooting the $2^{\\text{nd}}$.\nFor $n=4$, the $1^{\\text{st}}$ person survives again.\nLet us define \"round\" as one complete circle of shootings. Logically it makes sense that the first person always survives as the number of people keeps halving evenly in each round. Let us prove this by induction.\nLet $S(n)$ be the safe position for a given $n = 2^{k}$\nBase Case: When $k = 0$, we have one pirate $(2^0 = 1)$. The only pirate, which is the first, is the last to survive, so $S(1) = 1$.\nInductive Step: Assume our hypothesis is true for $k = m$. That is, $S(2^m) = 1$.\nWe need to prove this holds for $k = m + 1$, i.e. for $n=2^{m+1}$ pirates.\nIn the first round of shooting, all pirates in even-numbered positions are eliminated. Therefore, at the end of the first round, there are $2^m$ pirates left, all in odd-numbered positions.\nNow, the pirates' positions are reset, and the first pirate (who was initially in position 1) is still in position 1.\nTherefore, we now have a circle of $2^m$ pirates, starting from the first pirate. The inductive hypothesis states that the first pirate will survive till the end.\nThus, $S(2^k) = 1$ is true for any integer $k\\ge 0$.\nFor $n = 1024 = 2^{10}$, the position of the surviving pirate would still be the $1^{\\text{st}}$ position. Therefore, someone should stand in the first position to survive.\nTrivia\nThis problem is called \"Josephus problem\", named after Flavius Josephus, a Jewish historian living in the $1^{\\text{st}}$ century. Allegedly, he and his 40 soldiers were trapped in a cave by Roman soldiers. Preferring suicide instead of being captured, they decided to form a circle and, kill every third soldier until none remained. Josephus, who preferred to surrender, managed to arrange the order of the soldiers in the circle so that he and another man were the last two survivors. At this point, they surrendered to the Romans rather than killing themselves.\nIf $n$ is not a power of $2$, then we can use a formula. Find the largest $m$ such that $2^m $<$ n$.\nTake $l = n-2^m$.\nThen the safe position is $2 \\cdot l + 1$.\nFor example, in the case of 100 pirates (the original puzzle), $N=100, 2^m=64, m=6, l = 36 \\implies 2 \\cdot l + 1 = 73$\nThe formal proof for this formula can be found here (Wikipedia)."
+  },
+  {
+    "id": 24,
+    "title": "Invisible Dice",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "There is a regular die and a special invisible die. You know that regular die has integers 1 to 6, but don't know what's on the invisible dice. After tossing, I speak the sum of outcome of both die. It so happens that the outcome is an interger between 1 to 12, with equal probability (1/12 each). Can you guess what are the numbers printed on special invisible dice?",
+    "Hint": "For the sum to be 1, we need atleast 0, and for sum to be 12, what do we need? Can you guess the digits of invisible dice now?",
+    "Answer": "0 0 0 6 6 6",
+    "Solution": "Faces of cube have numbers: 0 0 0 6 6 6 . If we compute conditional probability, we get 0 with probabilty (1/2) and 6 with probability (1/2). Hence the sum is 1,2....12 with probability of (1/12) each"
+  },
+  {
+    "id": 25,
+    "title": "Daughter or Son",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "Sheldon says \"Suppose I have two children. Younger one is a girl\". What is the probability that both children are girls?\n\"Forget all that, and suppose I have two children, and atleast one of them is a boy\". Find probability of two boys.\n\"Suppose I have two kids, lets call them Bouba and Kiki\", says Dr. Cooper, \"and suppose Bouba is a girl !\" What is the probability that I have two daughters?\"",
+    "Answer": "1/2, 1/3, 1/3",
+    "Solution": "First and second are un-ambiguous. Third is debatable as per the interpretation. I believed 1/3, as the names Cooper used were anonymous, and should have given no extra information. But it turns out that Cooper did provide some extra information. He had actually fixed a person (A). Also, calculating the probability in part 3 using conditionals will give 1/2."
+  },
+  {
+    "id": 26,
+    "title": "Dark Room Deck",
+    "difficulty": "easy",
+    "category": "general",
+    "Question": "In a dark room, there is a deck of 52 cards, with exactly 10 cards facing up, rest facing down. You need to split this into two decks with equal number of cards facing up!",
+    "Hint": "The question can be solved even when up facing cards are 11. The split decks need not have equal number of up-facing cards.",
+    "Solution": "Create a deck of k cards randomly from the original 52-card deck, (k=10 here) and then turn over the k-card deck. Goal is achieved!"
+  },
+  {
+    "id": 27,
+    "title": "Cheating Husbands",
+    "difficulty": "easy",
+    "category": "strategy",
+    "Question": "A certain town comprises of 100 married couples. Some husbands secretly cheat on their wives. All wives know about the nature of every husband except their own. When a wife concludes that her husband cheated, she kicks her husband into the street at midnight. All husbands remain silent about their secret. One day, the mayor of the town announces to the whole town that there is at least 1 cheating husband in the town. After announcement, no one talks, waiting for someone to get kicked. Till 9th night from announcement, no husband was kicked, but on the 10th night, some husbands got kicked out simultaneously. How many are they?",
+    "Hint": "What happens if only one husband cheated?",
+    "Solution": "It must be 10 husbands kicked out.\nIf there was only 1 cheating husband in the town, there will be 99 women who know exactly who the cheater is. The 1 remaining woman, who is being cheated on, would have assumed there are no cheaters. But now that the mayor has confirmed that there is at least one cheater, she realizes that her own husband must be cheating on her. So her husband gets kicked on the day of the announcement.\nNow lets assume there are 2 cheaters in the town. There will be 98 women in the town who know who the 2 cheaters are. The 2 wives, who are being cheated on, would think that there is only 1 cheater in the town.  Since neither of these 2 women know that their husbands are cheaters, they both do not report their husbands in on the day of the announcement. The next day, when the 2 women see that no husband was kicked, they realize that there could only be one explanation  both their husbands are cheaters. Thus, on the second day, 2 husbands are kicked.\nThrough induction, it can be proved that when this logic is applied to n cheating husbands, they are all kicked on the n th day after the mayors announcement. Hence it must be 10 husbands kicked in our case."
+  },
+  {
+    "id": 28,
+    "title": "Father of lies",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "A father claims about snowfall last night. First daughter tells that the probability of snowfall on a particular night is 1/8. Second daughter tells that 5 out of 6 times the father is lying! What is the probability that there actually was a snowfall?",
+    "Hint": "Conditional Probability or Baye's Theorem",
+    "Answer": "1/36",
+    "Solution": "Let $S =$ Snowfall occurred, and $C$ be the event that the father is claiming snowfall ocurred.\nProbability of (Snowfall given Claim) = $P(S | C) = \\dfrac{P(C|S) \\cdot P(S)}{P(C)}$\n$P(S) = 1/8$\n$P(C|S) =1 - 5/6 = 1/6$ (given in the question, father lies 5/6 times)\n$P(C) = P(\\text{True claim}) + P(\\text{False Claim})$\n$= P(C \\cap S) + P(C \\cap S')$  where $S'$ means that it did not snow.\n$= P(C|S) \\cdot P(S) + P( C | S') * P(S')$\n$= (1/6 \\cdot 1/8) + (5/6 \\cdot 7/8)$\n$P(S | C) = \\dfrac{P(C|S) \\cdot P(S)}{P(C)} = \\dfrac{1/6 \\cdot 1/8}{(1/6 \\cdot 1/8) + (5/6 \\cdot 7/8)} = \\dfrac{1}{36}$"
+  },
+  {
+    "id": 29,
+    "title": "Devil's Penny",
+    "difficulty": "easy",
+    "category": "general",
+    "Question": "You are in a game against devil, on a perfectly round table and with an infinite pile of pennies. He says, \"OK, we'll take turns putting one penny down, no overlapping allowed, and the pennies must rest flat on the table surface. The first guy who can't put a penny down loses.\" You can go first. How will you guarantee victory?",
+    "Hint": "Try the problem if coins have unit radii, and table has radius 1 \\& 3.",
+    "Solution": "You place a penny right in the center of the table. After that, whenever the devil places a penny on the table, mimic his placement by placing a penny diametrically opposite and at same distance from center. If he has a place to place a penny, so will you. The devil will run out of places to put a quarter before you do."
+  },
+  {
+    "id": 30,
+    "title": "Witches at the coffee shop",
+    "difficulty": "easy",
+    "category": "probability",
+    "Question": "Two witches make a nightly visit to an all-night coffee shop. Each arrives at a random time between 0:00 and 1:00. Each one of them stays for exactly 30 minutes. On any one given night, what is the probability that the witches will meet at the coffee shop?",
+    "Hint": "Graph Shading",
+    "Answer": "3/4",
+    "Solution": "Plot the graph of X and Y, where X and Y denote the time each witch arrives. This will form a 60x60 square for total feasible region. The probability that they meet is |X-Y|$\\le$ 30. Draw this as favorable region, by joining line (30,0) with (60,30) and (0,30) with (30,60). Clearly the interior of this region has area 3/4 th of total. Hence the probability = 3/4 = 0.75"
+  },
+  {
+    "id": 31,
+    "title": "Poisonous wine",
+    "difficulty": "easy",
+    "category": "strategy",
+    "Question": "So there's this king. Someone breaks into his wine cellar where he stores 1000 bottles of wine. This person proceeds to poison one of the 1000 bottles, but gets away too quickly for the king's guard to see which one he poisoned or to catch him.\nThe king needs the remaining 999 safe bottles for his party in 4 weeks. The king has 10 prisoners who deserve execution. The poison takes about 3 weeks to take effect, and any amount of it will kill whoever drinks it. How can he figure out which bottle was poisoned in time for the party?",
+    "Hint": "Convert to binary strings?",
+    "Solution": "The king has to mix wine in order to isolate the single poisoned one. 2) There are 10 servants. After about 3 weeks, each one can be either dead or alive, meaning that there are 2^10 = 1024 possible outcomes. Since 1024 $>$ 1000, it's actually possible for some scheme to work.\nHere's the scheme: The king assigns each servant a number from 1-10. The king assigns each bottle a number from 0-999. When he labels them, though, he writes the number on the bottle in binary with ten digits, like this: 0: 000000000 1: 000000001 2: 000000010 3: 000000011 4: 000000100 5: 000000101 ... 999: 1111100111 and so on.\nNow the strategy is simple: Pick bottle 1, write its binary form, look at the positions where '1' appears (here: 1st only). Make the corresponding prisoner drink small quantitiy of that wine. (ie prisoner 1 takes a sip of wine \\#1). Continue this process upto 1000th wine. After 3 weeks, suppose only prisoner number 4 \\& 7 die. This means the binary representation of poisoned wine has '1' at position 4 \\& 7, and rest all zeros. Convert this binary number to decimal and that gives the poisoned wine."
+  },
+  {
+    "id": 101,
+    "title": "Drunk Passenger?",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "A line of 100 airline passengers is waiting to board a plane. They each hold a ticket to one of the 100 seats on that flight. For convenience, let's say that the nth passenger in line has a ticket for the seat number 'n'. Being drunk, the first person in line picks a random seat (equally likely for each seat). All of the other passengers are sober, and will go to their proper seats unless it is already occupied; If it is occupied, they will then find a free seat to sit in, at random.\nWhat is the probability that the last (100th) person to board the plane will sit in their proper seat (\\#100)?",
+    "Hint": "Can last passenger arrive at any other seat than 1 or 100?",
+    "Answer": "1/2",
+    "Solution": "Notice that the last passenger can only take seat \\#1 or \\#100. If any passenger takes seat \\#1, the cycle stops, and all the subsequent passengers take their own seats (including last). Otherwise, if \\#100 seat is taken before \\#1, the cycle is paused, i.e., the subsequent passengers do take their own seats, but the last passenger would take seat \\#1. Now for any passenger from 1st to 99th, who is picking random vacancy, will choose between \\#1, \\#100 or any other seat equally likely. Thus, by symmetry, \\#1 or \\#100, any one will be taken first - with equal probability. Hence last person ends up at his seat with probability 0.5"
+  },
+  {
+    "id": 102,
+    "title": "Stick to Triangle",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "A stick is broken into 3 parts, by choosing 2 points randomly along its length. With what probability can it form a triangle?",
+    "Hint": "All three broken parts must satisfy the triangle inequality. Or rather, each of the broken part must be less than half of stick's length.",
+    "Answer": "1/4",
+    "Solution": "All 3 sides have to have lengths less than half the length of the stick. the conditions are min{ x.y}$\\le$ 0.5; max{x,y}$>$=0.5; |x-y|$\\le$0.5 . looking at the unit square, and dividing into 8 congruent triangles by lines parallel to the axes and y=x line, its easy to see 2 of the 8 triangles satisfy the condition. so the answer is 1/4"
+  },
+  {
+    "id": 103,
+    "title": "Rabbit on the Staircase",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "A rabbit sits at the bottom of a staircase with n stairs. The rabbit can hop up only one or two stairs at a time. What kind of sequence is depicted by the different ways possible for the rabbit to ascend to the top of the stairs of length n=1,2,3...?",
+    "Hint": "Recursion",
+    "Answer": "Fibonacci Sequence.",
+    "Solution": "Suppose f(n) are the number of ways to reach nth stair. Notice that the final hop is either a single jump or double jump, i.e. its from (n-1)th stair or (n-2)th. Thus f(n) = f(n-1) + f(n-2), where f(0)=f(1)=1.  This is Fibonacci sequence."
+  },
+  {
+    "id": 104,
+    "title": "Sharing Wood",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "A. B \\& C live together and share everything equally. One day A brings home 5 logs of wood, B brings 3 logs and C brings none. Then they use the wood to cook together and share the food. Since C did not bring any wood, he gives $8 instead. How much to A and how much to B?",
+    "Hint": "Its not 5 \\& 3",
+    "Solution": "Since each person consumed 8/3 woods. A gave 5-8/3 = 7/3 woods to C and B gave 3-8/3 = 1/3 woods to C.\nSo, Out of the 8 dollars, A gets 7 and B gets 1"
+  },
+  {
+    "id": 105,
+    "title": "Infinity \\& Beyond",
+    "difficulty": "medium",
+    "category": "strategy",
+    "Question": "Suppose you have a hotel which has one floor with infinite number of rooms in a row and all of them are occupied.\nA new customer wants to check in, how will you accommodate her?\nWhat if infinite number of people want to check in, how will you accommodate them?\nSuppose infinite number of buses arrive at the hotel, each having infinite number of people, how will you accommodate them?",
+    "Hint": "Define Infinity ;)",
+    "Solution": "Since there are infinite number of rooms and infinite+1= infinite\nJust ask person in room k to move to k+1, thus making the first room vacant. :)\nIn the other case, since infinite+infinite = infinite\nasking person in room k to move to 2k solves the problem.\nSince NxN is countable set. We can get a 1-1 mapping from N to NxN\nHence, we can accommodate (infinite people X infinite buses) in the hotel.\nRelevant article:\nhttp://en.wikipedia.org/wiki/Cantor_pairing_function"
+  },
+  {
+    "id": 106,
+    "title": "Chuck a Luck",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "In this gambling game, a player can buy a ticket for Rs 1 on any number from 1 to 6. Three identical and unfair dice are rolled. If the booked number appears on 0, 1, 2 or 3 dice, player wins Rs 0, 1, 2 or 3 respectively, without returning the original Rs 1. What is expected money you can win after buying a ticket for Rs 1?",
+    "Hint": "Book the full house",
+    "Answer": "1/2",
+    "Solution": "We bet Rs 1 on each number 1-6. In any case, we get Rs 3 back. That is 1/2 per ticket. Hence the expected amount of money we can win is 1/2. A tedious way to arrive at this answer is to calculate the probability of getting 1, 2 or 3 faces common to our booking."
+  },
+  {
+    "id": 107,
+    "title": "MULTILINGUAL",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "A group has 70 members. For any two members $X$ and $Y$ there is a language that $X$ speaks but $Y$ does not, and there is a language that $Y$ speaks but $X$ does not. At least how many different languages are spoken by this group?",
+    "Hint": "8 choose 4 $= \\binom{8}{4}  = 70$",
+    "Answer": "This group has at least 8 different languages.",
+    "Solution": "Let's go with hit and trial.\nEveryone knows the same language, that is a contradiction. Therefore it must be more than 1 language.\nSo, $P_1$ knows one language and $P_2$ knows another language. But $P_3$ will know the same language as either $P_1$ or $P_2$. We cannot extend this to 3 people.\nMight be true, but it is hard to confirm.\nLet's try a different approach. Let's calculate the largest group possible, given the number of languages.\nIf there are three languages ($L_1, L_2, L_3$), we can construct the following table.\n$L_1$\n$L_2$\n$L_3$\n$P_1$\nknows\n$P_2$\nknows\n$P_3$\nknows\nIf there are four languages ($L_1, L_2, L_3, L_4$), we can construct the following table.\n$L_1$\n$L_2$\n$L_3$\n$L_4$\n$P_1$\nknows\n$P_2$\nknows\n$P_3$\nknows\n$P_4$\nknows\nThis is decent, but I think we can do better by assigning more than one language to each person.\n$L_1$\n$L_2$\n$L_3$\n$L_4$\n$P_1$\nknows\nknows\n$P_2$\nknows\nknows\n$P_3$\nknows\nknows\n$P_4$\nknows\nknows\n$P_5$\nknows\n$P_6$\nknows\nknows\nNow, there are $6$ people, because we assigned two languages. The number 6 is coming from choosing $2$ from $4$, i.e. $\\binom{4}{2} = 6$\nNote that if we assign the same set of languages to two people (say: $L_1$ \\& $L_2$) then these two members will fail the desired criteria. Therefore we have to choose different sets of languages for each member, and one set cannot even be a subset of another set.\nAlso, note that the term $\\binom{n}{x}$ takes the maximum value for $x = n/2$.\nTherefore, the maximum number of people for a given number of languages is $\\binom{n}{n/2}$, where $n$ is the number of languages.\nNow, looking at the original question, $70 = \\binom{8}{4}$, i.e. the maximum number of languages is $8$, and the maximum number of languages that one person knows is $4$.\nNote that we can also"
+  },
+  {
+    "id": 108,
+    "title": "Guess the Toss",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "A and B are in a team called AB, playing against C. If AB team wins they win Rs 3, nothing otherwise.\nThe Game: A and B are placed in 2 separate rooms far away. A will toss a coin and B will also toss a coin; A will have to guess the outcome of B's toss and B will guess A's. If both guesses are right, team AB wins Rs 3, nothing otherwise.\nShould they play the game, by paying Rs 1 at the start?",
+    "Hint": "The winning probability is not 1/4. They can make a strategy before the game.",
+    "Answer": "1/2",
+    "Solution": "Let's list down all the possibilities.\nA\nB\nH\nH\nH\nT\nT\nH\nT\nT\nObserve that $2$ out of $4$ times, their coins have the same face, i.e. either both heads or both tails.\nThey can speak their own coin's face as their guess. They win the game with a probability of $1/2$.\nThe pay-off will be positive ($1/2 \\cdot 3 - 1 = 0.5$), and hence they should play this game."
+  },
+  {
+    "id": 109,
+    "title": "Pattern on Snowflakes",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "Snow-particles are falling on the ground one after another. A particular snowflake turns out to be of type \"Stellar Dendrite\" with probability 'p' if its previous particle was also Stellar Dendrite, and with probability 'q' if previous one was something else. If a snowflake is picked from ground, what is the probability that it is Stellar Dendrite?",
+    "Hint": "Need to form a recursive equation of conditional probability",
+    "Answer": "probability is q/(1-p+q)",
+    "Solution": "Let $x$ be the probability that a snowflake picked from the ground is a 'Stellar Dendrite'. Thus, when a new snowflake is falling, the last snowflake was Stellar Dendrite with probability $x$.\nThis means that the probability the new falling snowflake is Stellar Dendrite $= x*p + (1-x)*q$. But, for the composition of the snowflakes on the ground to remain constant, $xp+(1-x)q$ should be same as $x$\n$\\implies x = xp + q - xq = x(p-q) + q $\n$\\implies x (1- (p-q)) = q $\n$\\implies x = \\dfrac{q}{ (1- p + q)} $\nThis is a kind of steady state analysis."
+  },
+  {
+    "id": 110,
+    "title": "King's Salary",
+    "difficulty": "medium",
+    "category": "strategy",
+    "Question": "After the revolution, each of the 66 citizens of a certain city, including the king, has a salary of 1. King cannot vote, but has the power to suggest changes - namely, redistribution of salaries. Each person's salary must be a whole number of dollars, and the salaries must sum to 66. He suggests a new salary plan for every person including himself in front of the city. Citizens are greedy, and vote yes if their salary is raised, no if decreased, and don't vote otherwise.  The suggested plan will be implemented if the number of \"yes\" votes are more than \"no\" votes. The king is both, selfish and clever. He proposes a series of such plans. What is the maximum salary he can obtain for himself?",
+    "Hint": "notice:  (1) that the king must temporarily give up his own salary to get things started, and (2) that the game is to reduce the number of salaried citizens at each stage.",
+    "Answer": "63",
+    "Solution": "Continuing from the hint, The king begins by proposing that 33 citizens have their salaries doubled to $2, at the expense of the remaining 33 (himself included). Next, he increases the salaries of 17 of the 33 salaried voters (to $3 or $4) while reducing the remaining 16 to $0. In successive turns, the number of salaried voters falls to 9, 5, 3, and 2. Finally, the king bribes three paupers with $1 each to help him turn over the two big salaries to himself, thus finishing with a royal salary of $63. It is not difficult to see that the king can do no better at any stage than to reduce the number of salaried voters to just over half the previous number; in particular, he can never achieve a unique salaried voter. Thus, he can do no better than $63 for himself, and the six rounds above are optimal\nHence the answer is $63\nNote: It is possible to reach $65 if the King could vote (that would be a variant of this puzzle)."
+  },
+  {
+    "id": 111,
+    "title": "Counting on friends",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "At a party of $N$ people, there are some friendships. Prove that there are at-least two people with the same count of friends.\nAssume that $N \\ge 2$ and that the friendships are symmetric, i.e, if $A$ is friends with $B$, then $B$ is in turn friends with $A$.",
+    "Hint": "Pigeonhole Principle",
+    "Answer": "Since there are $N-1$ possibilities for friend-count and total $N$ people, atleast two people must have the same count.",
+    "Solution": "The question can be solved by using the Pigeonhole Principle, which essentially states that if there are more pigeons than pigeonholes, then there must be at least one pigeonhole with more than one pigeon.\nIn this party of $N$ people, indexed from $1$ to $N$. The maximum number of friends a person can have is $N-1$, because one can be friends with every other person but not with oneself. So the possible number of friends one can have ranges from $0$ to $N-1$, a total of $N$ possibilities.\nNote: If someone has zero friends, then someone else can have atmost $N-2$ friends, alternatively if someone has $N-1$ friends then someone else must have at-least $1$ friends.\nHence, the total possibilities of the count of friends ranges from $0$ to $N-2$ or from $1$ to $N-1$, i.e, total $N-1$ possibilities, but there are only $N$ people at the party.\nLet's consider the count of friends as \"pigeonholes\" and people as \"pigeons\". Notice that there are $N$ people (\"pigeons\") and $N - 1$ different count of friends (\"pigeonholes\").\nSo, by the Pigeonhole Principle, at least two people must have the same count of friends in the party of $N$ people.\nThere's another way to solve this.\nProof by Contradiction: Assume that every person has a different number of friends from $0$ to $N - 1$. We would have a situation where one person has $0$ friends and another person has $N-1$ friends. This, however, contradicts the premise that friendships are symmetric, because if one person has $N-1$ friends, there cannot be someone with $0$ friends. Hence not everyone has a different number of friends"
+  },
+  {
+    "id": 112,
+    "title": "Random Ratio",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "p and q are two points chosen at random between 0 \\& 1. What is the probability that the ratio p/q lies between 1 \\& 2?",
+    "Hint": "Graph Shading. (Whenever we see two uniform random variables, we graph them up!)",
+    "Answer": "0.25",
+    "Solution": "Assume that the points are $x$ \\& $y$ respectively. We want to know if $x/y$ is between 1 and 2.\nIf we plot this, the limits are $x/y=1$ and $x/y = 2$.\nThus, the desired region is the area between lines $y=x$ \\& $y=x/2$.\nThis region is $1/4$ th of the rest."
+  },
+  {
+    "id": 114,
+    "title": "Second Chance",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "Roll a die, and you get paid what the dice shows. But if you want, you can request a second chance \\& roll the die again; get paid what the second roll shows instead of the first. What is the expected value?",
+    "Hint": "We only roll the die again if the expected value of the second roll is higher than the first.",
+    "Answer": "4.25",
+    "Solution": "Let's compute the expected value of a single roll first.\nA fair six-sided die has outcomes 1 through 6 each with probability $1/6$. So the expected value of a single roll is:\n$\\dfrac{1}{6} \\cdot 1 + \\dfrac{1}{6} \\cdot 2 + \\dfrac{1}{6} \\cdot 3 + \\dfrac{1}{6} \\cdot 4 + \\dfrac{1}{6} \\cdot 5 + \\dfrac{1}{6} \\cdot 6 = 3.5$\nNow, for the strategy where we can roll a second time, the optimal strategy is to roll again when the first roll is below the expected value (i.e., 1, 2, or 3) because on average, the second roll should be higher.\nSo, if we roll a 1, 2, or 3, we should roll again, and the expected value of that roll is again 3.5. If we roll a 4, 5, or 6, we should keep it.\nTherefore, the expected value of the game under this optimal strategy is:\n$\\dfrac{1}{6} \\cdot 3.5 + \\dfrac{1}{6} \\cdot 3.5 + \\dfrac{1}{6} \\cdot 3.5 + \\dfrac{1}{6} \\cdot 4 + \\dfrac{1}{6} \\cdot 5 + \\dfrac{1}{6} \\cdot 6$\n$=\\dfrac{25.5}{6} = 4.25$\nSo, the expected payout under the optimal strategy of re-rolling when the first roll is 1, 2, or 3 is $4.25.\nFollow up question: What if you are allowed to roll the dice as many times as you want? What is the expected value of the game?\nAnswer: 6\nSolution: If the number is not 6, you can request a retry. Stop only when the value is equal to 6."
+  },
+  {
+    "id": 115,
+    "title": "Innocent Monkey",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "A very innocent monkey throws a fair die. The monkey will eat as many bananas as are shown on the die, from 1 to 5. But if the die shows '6', the monkey will eat 5 bananas and throw the die again. This may continue indefinitely. What is the expected number of bananas the monkey will eat?",
+    "Hint": "The pattern repeats after the first throw",
+    "Answer": "4",
+    "Solution": "Method 1\nThe intuition is that either the die is thrown only once, or more than once. In case of only once, the expected value is $3$.\nIn case of more than once, the expected value is $5$ + expected value of a new game. We need to find the expected value combining these two.\nLet $X$ be number of bananas eaten overall  and $Y$ = number shown on the first dice.\n$E_1 = E[X | \\text{only once}] = E[X | Y $<$ 6] = \\dfrac{1}{5}(1+2+3+4+5) = 3$\n$E_2 = E[ X | \\text{more than once}] = E[X | Y=6] = 5 + E[X]$\nnow, $E[X] =  \\dfrac{5}{6}\\cdot E_1 + \\dfrac{1}{6} \\cdot E_2$\n$\\implies E[X] = \\dfrac{5}{6} \\cdot 3 + \\dfrac{1}{6} \\cdot (5 + E[X])$\nSolving this equation gives $E[X] = 4$\nMathematically, this is called the law of total probability, i.e, $E[ E[X|Y] ] = E[X]$.\nThe denominator 5 is not intuitive when solving $E_1$. For this reason, I have written the second method.\nMethod 2\nHere, we will solve with basic algebra, without any special techniques.\nLet $X$ be the total number of banans eaten.\nWe know that $E[X]= P(X=1)\\cdot 1 + P(X=2) \\cdot 2 + \\ldots$\nFor the first $5$ terms, the sum is simply $1/6 \\cdot (1+2+3+4+5) = 15/6$\n$6$th term onwards, we can see a pattern:\n$P(X=6)  \\cdot 6 + P(X=7) \\cdot 7 + \\ldots$\nNote that $X\\ge 6$ occurs when the die is thrown again, i.e, $P(X=i) = 1/6 \\cdot P(X=i - 5)$ for $i\\ge 6$.\nLet's substitute these values in the above equation.\n$ \\dfrac{1}{6} [ P(X=1)  \\cdot 6 + P(X=2) \\cdot 7 + \\ldots  ]$\nNow, let's move the extra terms aside, to make it look more like $E[X]$\n$ \\dfrac{1}{6}  [ P(X=1) \\cdot 1 + P(X=2) \\cdot 2 + \\ldots ]  + \\dfrac{1}{6} [P(X=1) \\cdot 5 + P(X=2) \\cdot 5 + \\ldots]$\nThe left part is equal to $\\dfrac{1}{6} E[X]$, while the right part is $1/6 \\cdot 5 [$ probability of everything $] = 5/6 $\n$\\implies  E[X] = \\dfrac{15}{6} + \\dfrac{1}{6}E[X] + \\dfrac{5}{6}$\nThis simplifies to $E[X] = 4$\nMethod 3\nAnother method is to expand all the terms using linearity of expectation and then use GP sum formula.\nLet $X_i$ denote the number of bananas eaten on the $i$th throw.\nThus, $E[X] = E[\\sum_{i=1}^{\\infty} X_i] = \\sum_{i=1}^{\\infty} E[X_i]$ (using linearity of expectation)\n$E[X_1] = \\frac{1}{6} \\cdot 1 + ... + \\frac{1}{6}  \\cdot 5 + \\frac{1}{6}  \\cdot 5 = \\frac{20}{6}$\n$E[X_2] = P(\\text{ first die roll was 6} ) \\cdot (\\text{ terms that match} E[X_1])$\n$\\implies E[X_2] = \\dfrac{1}{6} \\cdot \\dfrac{20}{6}$\n$\\implies E[X_3] = \\dfrac{1}{6^2} \\cdot \\dfrac{20}{6}$\nThis is a Geometric Progression, with $a = 20/6, r=1/6$, the sum of infinite terms will be $\\dfrac{a}{(1-r)} = \\dfrac{20/6}{1-1/6} = 4$\nNote: This will not work for a problem that involves a state. For instance, if the monkey could cheat upto 3 times (i.e, re-throw the dice even when it is not a \"6\"), and the cheating-count was reset to zero when a real \"6\" appears, then this method will not work."
+  },
+  {
+    "id": 116,
+    "title": "Consecutive Heads",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "What is the expected number of coin tosses required to get $N$ consecutive heads?\nDenote the term by $E_N$",
+    "Hint": "Try to find a recurrence relation between $E_{N}$ and $E_{N-1}$.",
+    "Answer": "Recurrence form: $E_N = 2E_{N-1} + 2$;\nClosed form: $E_N = 2^{N+1}-2$",
+    "Solution": "Method 1\nWe can simply reuse the method from problem \"Innocent Monkey\" (the law of total probability)\nDefine let $X_N$ = number of tosses to get $N$ consecutive heads\n$E_N$ = expected number of coin tosses we require from now on, to get $N$ consecutive heads.\nNote that if we already have $N-1$ Heads, then with probability (1/2), we can get $N$ consecutive heads, and with probability (1/2), we get a tail, and the state is reset.\n$E_N =  \\frac{1}{2}( E_{(N-1)} + 1) + \\frac{1}{2}(E_{N-1} + 1 + E_N)$\nthe extra 1 is because we just used a toss\n$E_N = 2E_{N-1} + 2$\nThis is a recurrence relation and a good enough solution. But we can solve this into its closed form too.\nThe right way to solve this is by using generating functions or characteristic equations.\nBut we will use a more intuitive approach.\nWe can tell it is an exponential function, involving powers of $2$ because the $N$th term is about 2 times $N-1$th term. Suppose $E_N = C_1 \\cdot 2^{N} + C_2$\nAssume that $E_0 = 0$ (no tosses needed) $\\implies 0 = C_1 + C_2$\nAnd $E_1 = 2$ (refer to method 2, step 1) $\\implies 2 = C_1\\cdot 2 + C_2$\nSimplify to get $C_1 =2, C_2 = -2$\nThis simplifies to $E_N = 2^{(N+1)}-2$\nMethod 2\nThis approach is more rigorous and algebraic.\nLet us solve a simpler question first.\nStep 1: What's the expected number of coin tosses to get $N=1$ heads?\nThere are two possibilities:\nWe get a head in the first toss itself. This happens with probability $1/2$.\nWe get a tail in the first toss, and then we start a new game, where number of chance is 1 more than the expected value.\n$E_1 = \\dfrac{1}{2} \\cdot 1 + \\dfrac{1}{2} \\cdot (1 + E_1)$\nSimplify to get $E_1 = 2$\nStep 2: What's the expected number of coin tosses to get $N=2$ consecutive heads?\nThere are three possibilities:\nWe can get two heads in the first two tosses itself. This happens with probability $1/4$, and takes 2 tosses.\nWe can get a tail in the first toss, and then we start a new game, where number of attempts is 1 more than the expected value.\nWe can get a heads in the first toss, and then tails in the second. Then we start a new game, where number of attempts is 2 more than the expected value.\n$E_2 = \\dfrac{1}{4} \\cdot 2 + \\dfrac{1}{2} \\cdot (1 + E_2) + \\dfrac{1}{4} \\cdot (2 + E_2)$\nSimplify to get $E_2 = 6$\nStep 3: What's the expected number of coin tosses to get $N$ consecutive heads?\nThere are $N+1$ possibilities.\nWe can get $N$ heads in the first $N$ tosses itself. This happens with probability $1/2^N$, and takes $N$ tosses.\nWe can get a tail in the first toss, and then we start a new game, where number of attempts is 1 more than the expected value.\nWe can get a heads in the first toss, and then tails in second. Then we start a new game, where number of attempts is 2 more than the expected value.\n$\\vdots$\nWe can get $N-1$ heads in the first $N-1$ tosses, and then a tail in the $N^{th}$ toss. Then we start a new game, where number of attempts is $N$ more than the expected value.\n$E_N = \\dfrac{1}{2^N} \\cdot N + \\dfrac{1}{2} \\cdot (1 + E_N) + \\dfrac{1}{2^2} \\cdot (2 + E_N) + \\ldots + \\dfrac{1}{2^{N}} \\cdot (N + E_N)$\nThis looks quite complex, but be assured that this can be simplified. I did not spend time on solving this.\nSimplify to get $E_N = 2^{N+1}-2$\nMethod 3 (for $N=1$ only)\nWe can use linearity of expectation for $N=1$\nLet $X$ be the number of tosses required to get 1 head.\nDefine indicator variable, $X_i = 1$ if no Heads appeared before the $i$th step and $0$ otherwise. Once we get a \"heads\", we stop tossing, so all the later $X_i=0$.\nNote that $X = \\sum_{i=1}^{\\infty} X_i$\n$E[X] = E[\\sum_{i=1}^{\\infty} X_i] = \\sum_{i=1}^{\\infty} E[X_i]$ (using linearity of expectation)\n$E[X_1] = 1 \\cdot \\dfrac{1}{2} + 1 \\cdot \\dfrac{1}{2} = 1$ (if heads, then also count 1, if tails, then also count 1)\n$E[X_2] = P(\\text{First toss was Tails}) \\cdot  1$\n$E[X_3] = P(\\text{First two toss were Tails}) \\cdot 1 = \\dfrac{1}{4}$\n$\\vdots$\n$E[X] = \\sum_{i=1}^{\\infty} E[X_i] = 1 + \\dfrac{1}{2} + \\dfrac{1}{4} + \\ldots = 2$\nOkay, same answer as before.\nUnfortunately, I'm unable to extend this solution to $N=2$ and further because of the presence of the state.\nMethod 4 (for $N=1$ only)\nThis method uses the basic definition of expected value.\n$E[X] = P(X=1) \\cdot 1 + P(X=2) \\cdot 2 + \\ldots$\n$P(X=1) = 1/2$ (because we can get a head in the first toss itself)\n$P(X=2) = 1/4$ (first tails, and second hands)\n$\\vdots$\n$E[X] = \\dfrac{1}{2} \\cdot 1 + \\dfrac{1}{2^2} \\cdot 2 + \\dfrac{1}{2^3} \\cdot{3}$\nThis is an Arithmetic Geometric Progression of type $a, (a+d)r, (a+2d)r^2, \\ldots, [a + (n-1)d] r^{n-1}$ with $a=0, d=1, r=1/2$\nThe sum of infinite such terms is $S =  \\dfrac{a}{1-r} + \\dfrac{dr}{(1-r)^2} = \\dfrac{1/2}{1/4} = 2$"
+  },
+  {
+    "id": 117,
+    "title": "Chess Tournament",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "A chess tournament has $K$ levels and $N = 2^K$ players with skills $P_1 $>$ P_2 $>$ ... $>$P_{N}$. At each level, random pairs are formed and one person from each pair proceeds to the next level. When two opponents play, the one with the better skills always wins. What is the probability that players $P_1$ and $P_2$ will meet in the final level?",
+    "Hint": "if two players meet before the final, they don't meet at the final.",
+    "Answer": "$\\dfrac{N}{2(N-1)}$",
+    "Solution": "Consider $K=1, N=2$, the probability is 1.\nConsider $K=2, N=4$; the first round can be in the following ways:\n$(P_1 \\times P_2 ) \\times ( P_3 \\times P_4 )$\n$(P_1 \\times P_3 ) \\times ( P_2 \\times P_4 )$\n$(P_1 \\times P_4 ) \\times ( P_2 \\times P_3 )$\nThey don't meet in finals in the first case (out of a total of three). Thus, for $K=2, N=4$, the probability that they meet is $2/3$.\nAssume that instead of forming random pairs at each level, we have already constructed a \"tournament tree\", which is a binary tree. At the bottom of this structure, we have the initial $N$ players. Each node represents the match between the two children (players), and the value of each node is the player who won that match. The value of the top-level root node is the overall winner of the tournament.\nWith this image, we can see the whole tournament is deterministic and only depends on the initial arrangement of players (at the bottom level).\nWe also notice that the two players who reach the final level are the best players of the left half of the tree and the right of the tree (respectively).\nImagine $N$ players getting partitioned into two groups of $N/2$ players each, with player $P_1$ topping in the first group and player $P_2$ in the second. The best player of each partition reaches the final. The probability that a random partition separates player $P_1$ from $P_2$ is $\\dfrac{(N/2)}{(N-1)}$\nHere's how: There are $N$ empty slots in a sequence at the bottom layer of the tournament tree.\nWe can start assigning players from $P_1$.\nSuppose $P_1$ is assigned to a slot in the first half. For $P_2$, there are total $N-1$ slots remaining, and $N/2$ are in a new group (that does not contain $P_1$). Hence, there are $(N/2)$ favorable choices and $N-1$ total choices.\nHence the probability is $\\dfrac{N}{2(N-1)}$\nNote: The question says that we are forming random pairs at each level. But that is equivalent to retroactively constructing the bottom-layer of the tournament tree, in any desirable fashion.\nFor example, consider at the $i$th level, we randomly decide to match $P_j$ with $P_k$, even though they were not siblings in the tree at that level.\nThat's fine, we can modify the tree such that now $P_j$ and $P_k$ are siblings, while keeping the entire branch below each of those nodes intact."
+  },
+  {
+    "id": 118,
+    "title": "Number of Double Heads",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "A coin is tossed 10 times and the output written as a string. What is the expected number of HH? Note that in HHH, number of HH = 2. (eg: expected number of HH in 2 tosses is 0.25, 3 tosses is 0.5)",
+    "Hint": "Recursion",
+    "Solution": "Let the expected number of HH for n tossed is E(n). So, probability that an (n-1) toss experiments, ends in T is 1/2.\nSo, E(n) = 1/2 * E(n-1) + 1/2 * ( 1/2 * (E(n-1)+1) + 1/2 * (E(n-1)))\n(The first case when it ends in T. \\& The second case when it ends in H.\nIn the second case, if you get an H then, you get 1 more HH. )\nSo, E(n) = E(n-1) + 1/4, us E(2) = 1/4\nSo, E(n) = (n-1)/4\nFor n=10, E(10) = 2.25"
+  },
+  {
+    "id": 119,
+    "title": "Breaking Stick",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "The stick drops and breaks at a random point distributed uniformly across the length. What is the expected length of the smaller part?",
+    "Solution": "The probability that the break point belongs to first half is 1/2. In this case, the expected length of the small part is L/4. Its L/4 in the other case too. Hence E = 1/2 * L/4 + 1/2 * L/4 = L/4"
+  },
+  {
+    "id": 120,
+    "title": "Prisoner's Hat (multicolor)",
+    "difficulty": "medium",
+    "category": "strategy",
+    "Question": "100 prisoners are lined up and assigned a random hat These hats are available in 10 different unique and distinguishable colors. Each prisoner can see the hats in front of him but not behind. Starting with the prisoner in the back of the line and moving forward, they must each, in turn, say only one word which must be the color like \"red\" or \"blue\" or \"green\" etc. If the word matches their hat color they are released, if not, they are killed on the spot. They can hear each others answers, no matter how far they are on the line. What strategy should be used to help release maximum number of prisoners?",
+    "Hint": "Try prisoner's Hat puzzle first",
+    "Solution": "Call the first person in back of row the 100th prisoner. The 10 colours will be given codes from 0 to 9. The 100th prisoner will sum the numbers associated with the 99 colours he sees and will say the colour corresponding to it modulo 10. This is enough for 99th person. All he needs to do now is connect the dots, sum the number of hats he can see, calculate modulo 10, and compare it with what 100th prisoner said. This way all 99 prisoners will be saved, and 100th prisoner dies with probability 9/10."
+  },
+  {
+    "id": 121,
+    "title": "Rainbow Hats",
+    "difficulty": "medium",
+    "category": "strategy",
+    "Question": "N people team up and decide on a strategy for playing this game. Then they walk into a room.  On entry to the room, each person is given a hat on which one of the first N natural numbers is written. There may be duplicate hat numbers. For example, for N=3, the 3 team members may get hats labeled 2, 0, 2.  Each person can see the numbers written on the others' hats, but does not know the number written on his own hat. Every person then simultaneously guesses the number of his own hat.  What strategy can the team follow to make sure that at least one person on the team guesses his hat number correctly?",
+    "Hint": "Modulo?",
+    "Solution": "Let the persons be numbered 0 to N-1. The i-th person should announce 1 + (i-s)mod N, where s is the sum of numbers he sees. With this strategy, if the sum of all N numbers equals 1 + (m mod N), then the m-th gnome is guaranteed to announce the number of his own hat!"
+  },
+  {
+    "id": 122,
+    "title": "2 Equations \\& 3 Unknowns ",
+    "difficulty": "medium",
+    "category": "general",
+    "Question": "I guessed 3 natural numbers - $x, y, z$. You can ask me 2 sums of these numbers with any integer coefficients - $(a, b, c)$. That is, you give me a, b and c and I tell you the result of the expression $a*x+b*y+c*z$. Seeing the answer, you then give me the 2nd triplet of $(a,b,c)$ \\& I will tell $a*x+b*y+c*z$. Give me the algorithm to find $x$, $y$ and $z$.",
+    "Hint": "If digits are small, we can solve any number of variables by asking $a=1, b=10^{100}, c=10^{200}$ etc. just by reading these numbers between the zeros of result.",
+    "Solution": "Since they are natural numbers, if you knew the maximum number of digits any of them can have, say d, you could set a=1, b=10^d, c=10^2d, and you would be able to read the d-digit numbers directly. So, you use the first calculation to find the maximum number of digits, $(a,b,c)=(1,1,1)$.  let $d =$ digits of this result $(x+y+z)$\nThen, set $(a,b,c) = (1, 10^d, 10^{2d})$ Let the sum be $S$.\nThen $x =$ (first $d$ digits of $S$), $y = [d+1]$ to $2d$-digits of S, $z$ = $[2d+1$ to $3d]$ digits of $S$\nThus, we note that its posssible to solve for n natural numbers $x_1,x_2,...x_n$ with just $2$ questions."
+  },
+  {
+    "id": 123,
+    "title": "Domino Covering",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "An 8x8 chessboard can be entirely covered by 32 dominoes of size 2x1. Suppose we cut off two opposite corners of chess (i.e. two white blocks or two black blocks). Prove that now it is impossible to cover the remaining chessboard with 31 dominoes.",
+    "Hint": "The two diagonally opposite corners are of the same color.",
+    "Solution": "The two diagonally opposite corners are of the same color. A domino covers adjacent faces \\& hence a domino always covers 1 black and 1 white square. The 31 dominoes will cover 31 blacks and 31 whites. The chess has 30 \\& 32 square instead. Hence this can't be done."
+  },
+  {
+    "id": 124,
+    "title": "Fruit Magic",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "13 Apples, 15 Bananas and 17 Cherries are put in the magic hat. When ever a collision of two different fruits occurs, they both get converted into the third type. For example 1 Apple and 1 Banana can collide to form 2 cherries. No other collision is holy. Can a sequence of such magical collisions lead all 45 fruits to give just one type?",
+    "Hint": "This can't be done. Try to create a function of A,B,C which remains constant during a collision to get contradiction.",
+    "Solution": "Create the invariant function f(A,B,C) = (0A+1B+2C)mod3, this function remains constant during a collision. But f(13,15,17) = 1 is not same as any of final states f(45,0,0)=f(0,45,0)=f(0,0,45)=0. Hence this can not be done.\nA refreshment to this old trick was given by Aritro Pathak:\ncall the no of times apples are increased by 2 as A, bananas increased by 2 as B, and cherries increased by 2 as C. if we need 45 apples,total increments - decrements of apple = 32\nbut increments of apple = 2 * A;\nwhen ever 2 banana's are created, 1 Apple is lost, similarly for 2 cherries\ndecrements = B+C\nthus we have 2A-B-C=32, -2B+C+A=15, -2C+B+A=17. Subtract the last two to get 2=3 * (B-C) which is impossible. similar cases for when you want 45 of either cherries or bananas."
+  },
+  {
+    "id": 125,
+    "title": "Catching Ants",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "There are 51 ants sitting on top of a square table with side length of 1. If you have a square card with side 1/5, can you put your card at a position on the table to guarantee that the card encompasses at least 3 ants?\n(updated: square card was originally disk of radius 1/7)",
+    "Hint": "Pigeonhole principle",
+    "Solution": "To guarantee that the card encompasses at least 3 ants, we can separate the square into 25 smaller areas (squares of side 1/5 each). Applying the generalized Pigeon Hole Principle, we can show that at least one of the areas must have at least 3 ants. The card is large enough to cover any of the 25 smaller areas. Done!"
+  },
+  {
+    "id": 126,
+    "title": "Color Complex",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "On a 2D complex plane, all the integer-component points are coloured either White or Black. Is Possible to find a rectangle parallel to axis which has all corners of same color?",
+    "Answer": "Solution"
+  },
+  {
+    "id": 127,
+    "title": "Light Bulbs in circle",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "In a circle are light bulbs numbered 1 through n, all initially on. At time t, you examine bulb number t, and if its on, you change the state of bulb t + 1 (modulo n); i.e., you turn it off if its on, and on if its off. If bulb t is off, you do nothing. Prove that if you continue around and around the ring in this manner, eventually all the bulbs will again be on.",
+    "Hint": "It doesn't matter what the rules are, only thing that matters is that all bulbs should not go off!",
+    "Solution": "Suppose every orientation of light bulbs \\& position of current pointer (t modulo n) forms a different state. Since all bulbs dont go off, we must repeat a state after finite number of steps. Also notice that every state has a unique pre-state. Suppose the two states are at time T1 \\& T2. Notice that at time 0 all bulbs are on. Thus moving backwards from both states, we arrive at T2-T1, where all bulbs are on again."
+  },
+  {
+    "id": 128,
+    "title": "Chocolate Bar",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "There is a 6x8 rectangular chocolate bar made up of small 1x1 bits. We want to break it into the 48 bits.  We can break one piece of chocolate horizontally or vertically, but cannot break two pieces together!  What is the minimum number of breaks required?",
+    "Answer": "47",
+    "Solution": "For a chocolate of size mxn, we need mn - 1 steps. By breaking an existing piece horizontally or vertically, we merely increase the total number of pieces by one. Starting from 1 piece, we need mn - 1 steps to get to mn pieces.\nAnother way to reach the same conclusion is to focus on \"bottom left corners of squares\": Keep the chocolate rectangle in front of you and start drawing lines corresponding to cuts. Each cut \"exposes\" one new bottom left corner of some square. Initially, only one square's bottom left corner is exposed. In the end, all mn squares have their bottom left corners exposed."
+  },
+  {
+    "id": 129,
+    "title": "Dead Men Walking",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "Assume 100 zombies are walking on a straight line, all moving with the same speed. Some are moving towards left, and some towards right. If a collision occurs between two zombies, they both reverse their direction. Initially all zombies are standing at 1 unit intervals. For every zombie, you can see whether it moves left or right, can you predict the number of collisions?",
+    "Hint": "On every collision, assume that the two zombies don't reverse direction but simply cross each other.",
+    "Solution": "Since we can assume that zombies can pass through each other, for a zombie moving right, count the number of zombies to its right moving left. Add this number for every right moving zombie. That is the number of collisions."
+  },
+  {
+    "id": 130,
+    "title": "Square Infection",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "An infection spreads among the squares of an nXn checkerboard in the following manner. If a square has two or more infected neighbors, it becomes infected itself. (Each square has 4 neighbors only!). Prove that you cannot infect the whole board if you begin with fewer than n infected squares.",
+    "Hint": "Invariance",
+    "Solution": "Perimeter of infected area can't increase. It stays constant or decreases. Initially maximum perimeter is 4 * k if k blocks are infected. But to infect all blocks, the perimeter must increase to 4 * n, $k$<$n$. This is not possible"
+  },
+  {
+    "id": 1002,
+    "title": "To Begin or Not to begin?",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "A \\& B are alternately picking balls from a bag without replacement. The bag has k black balls and 1 red ball. Winner is the one who picks the red ball. Who is more likely to win, the on who starts first, or second?",
+    "Hint": "Look at k=0,1,2,3... Write down probability of starter being a winner.",
+    "Answer": "Begin!",
+    "Solution": "A \\& B keep on picking the balls without looking at their color. After all balls have been picked, the one who starts the game will have more balls (if k=even, total balls=odd) and hence higher probability of winning.\n(prob of A winning in first chance = 1/(k+1)) +\n(prob of A winning in 3rd chance = (1-(1/k+1)) * (1-1/k) * 1/(k-1) = 1/(k+1)) + ... +\n(prob of A winning in 2r+1-th chance = 1/(k+1)) + ... .\nWhen k=2n+1, there are n+1 such terms, giving the prob as (n+1) * 1/(k+1)=1/2.\nWhen k=2n, there are n+1 such terms, giving prob as (n+1) * 1/(k+1)=(n+1)/(2n+1)$>$1/2.\nHence, doesnt matter who starts first when k is odd.\nThe first player has higher chance of winning when k is even"
+  },
+  {
+    "id": 1003,
+    "title": "Crazy Postman",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "A postman brought N letters to a house with two letter-boxes. Since the two boxes were empty, he puts 1 mail in each of the two mail boxes. Then he chooses one of boxes with probability proportional to number of letters present in that box, and puts the 3rd letter in it. He does this for all subsequent letters. What is the expected number of letters in the box with lower letters?",
+    "Hint": "This can be made equivalent to randomly splitting a deck of n cards into two parts. (n$>$2)",
+    "Solution": "Suppose I have a stack of 2 black cards and one red card. Initially I put red between 2 black cards. Now I add black cards randomly between any two cards (so, initially it is either above or below red). Note that the probability that I add the card above the red card, when x-1 is the number of cards above red and y-1 is the number of cards below red is x/(x+y). Let the problem be: if red card is dividing the black cards into two sets, what is the expected number of black cards in the smaller section. So, we see that the two problems are equivalent.\nNow this way, we are getting all possible combinations in which one red and n black cards can be mixed, we see that the probability that the red card is at height h is independent of h. So, the probability that the smallest box contains n/2 letter or 1 letter (or any number of letters between 1 and n/2) are all same. So, expected number of letters in the smaller box is asymptotically n/4"
+  },
+  {
+    "id": 1004,
+    "title": "Single Bid",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "You have an opportunity to make one bid on an object, whose value to its owner is, as far as you know, uniformly random integer between $0 and $100. What you do know is that you are so much better at operating the widget than he is, that its value to you is 80\\% greater than its value to him. If you offer more than the widget is worth to the owner, he will sell it. But you get only one shot. How much should you bid? For example, if its actual value is $10, you bid \\& win at $11, and sell it for $18, making profit. But if you bid more than $18, you make lose! But since you don't know how much its actual price is, how do you bid in order to make some profit?",
+    "Hint": "Consider the case he already won the bid at $x. What happens next?",
+    "Solution": "CSEBLOG: We should bet only 0! (dont bet!) Suppose I bet $x and get the widget. So, the value of it for the owner would be $y, uniformly distributed between 0 and x. So, its value for me is $1.8y. Expected value for me is 1.8* Expected value of y = 1.8*x/2= 0.9x\nSo, if I get, expected value of the widget for me is 0.9x $ paying x $.\nIf x is less, i.e I am not getting it, I did not gain/lose anything.\nSo, overall I am losing. So, I should not bid."
+  },
+  {
+    "id": 1005,
+    "title": "Waiting for a Truck",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "On a given highway, trucks arrive at the station according to a Poisson process with Lambda = 0.1/minute. This means that after a truck is just passed, the time for the next truck to arrive is an exponential random number with average arrival time of 10 minutes. Your car just broke on this highway, and you are waiting for the next truck for hitchhiking, what is your expected waiting time? On average how many minutes ago the last truck left?",
+    "Hint": "It's not 5 minutes. Exponential distribution has memoryless property.",
+    "Solution": "Using memoryless property of exponential distribution, the expected waiting time is 10 minutes. This also holds backwards, hence the expected time last truck passed is also 10 minutes. But this does not violate the total inter-arrival time of 10 minutes, because if your car breaks at a random time, you are more likely to be in long interval than a short one. I don't have time today, remind me to post a more mathematical explanation."
+  },
+  {
+    "id": 1006,
+    "title": "The Blind Archer",
+    "difficulty": "medium",
+    "category": "probability",
+    "Question": "A very sharp, consistently skillful blind archer aimed for the center of a circular board and shot 2 arrows. He is expected to hit the aim, but doesn't hit it for sure. The archer is told that his first shot is better than second. He tried one more shot. What is the probability that this 3rd shot is the best shot among 3?\n(ie, Probability that 3rd arrow lands closer to center than his first two shots?)",
+    "Hint": "Enumeration; Symmetry between random variables.",
+    "Answer": "1/3",
+    "Solution": "Suppose x1, x2 and x3 are the distances of the arrows from center. As the archer is consistent, we can use symmetry, i.e., there are six equally likely cases: x1$<$x2$<$x3, (or 5 others, which are its permutations). Since archer is told that x1$<$x2, we are left with following equally likely cases:\nx1$<$x2$<$x3 , x2$<$x1$<$x3 , x1$<$x3$<$x2\nAmong these three, one is favorable. Hence The probability of last shot being best is 1/3.\nNotice that if there were (N-1) arrows, with first being better than rest, and then he shoots Nth arrow. The probability that Nth shot is best is 1/N."
+  },
+  {
+    "id": 1011,
+    "title": "Min \\& Max",
+    "difficulty": "medium",
+    "category": "strategy",
+    "Question": "Given an array of n numbers. Finding minimum takes n-1 comparisons. Finding maximum takes n-1 comparisons. If you had to simultaneously find both minimum and maximum, can you do it in less than 2n-2 comparisons?",
+    "Hint": "the answer is ~1.5n calculations. It uses a trick. When you compare two elements, one comparison is sufficient to find both min \\& max of those two elements.",
+    "Solution": "Solution requires approximately 1.5n comparisons instead of 2n comparisons.\nBreak n numbers into pairs of 2.\nSo, that is n/2 pairs. Find maximum and minimum in each pair. Cost = n/2.\nNow given n/2 maximums, find the maximum. Cost = n/2. Given n/2 minimums, find the minimum. Cost = n/2\nSo, overall cost 3n/2 comparisons."
+  },
+  {
+    "id": 1013,
+    "title": "Crazy Clock",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "There is a crazy clock in Alice's Dream, it has two hands initially pointing at 12. The minute hand moves clockwise, making 5 rounds (with varying speeds) and comes back to 12. In the same time, the hour hand goes anti-clock wise, finishing 4 rounds and returns to 12. How many times did the two cross each other ? (Cross means meet \\& pass through, hence ignore start \\& end)",
+    "Answer": "8",
+    "Solution": "In the reference frame of minute hand, hour hand moves exactly (5+4) = 9 rounds anti-clockwise with varying speeds (by adding total angular distance covered). 'Cross' occurs just in between two consecutive rounds. Thus hour hand crosses minute hand exactly 9-1=8 times. Same answer in ref. plane of hour-hand."
+  },
+  {
+    "id": 1014,
+    "title": "Candy Game",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "A group of students are sitting in a circle with the teacher in the center. They all have an even number of candies (not necessarily equal). When the teacher blows a whistle, each student passes half his candies to the student on his left. Then the students who have an odd number of candies obtain an extra candy from the teacher. Show that after a finite number of whistles, all students have the same number of candies.",
+    "Hint": "Look at minimum \\& maximum count of candies.",
+    "Solution": "The maximum number of candies held by a single student can never increase.\nThe minimum number of candies held by a single student always strictly increases, unless the student to his right also has the minimum number of candies, in which case the length of the longest consecutive segment of students who have minimum number of candies strictly decreases. Thus eventually the minimum has to strictly increase.\nSince the minimum has to strictly increase in a finite number of steps and cannot go beyond the maximum, all the numbers must eventually be equal in atmost n(max-min) steps."
+  },
+  {
+    "id": 1015,
+    "title": "Overlapping Coins",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "A rectangular table has 100 coins with unit radius, placed on it such that none of the coins overlap, and it is impossible to place any more coins on the table without causing an overlap. Using this specific configuration, find a special configuration of 400 coins which covers the table with overlaps.\nCovering means for every point on table there is a coin above it.",
+    "Hint": "Create coins of radius 2 from the center of all coins. Notice that these coins fill up entire table, they are just bigger than what we are given.",
+    "Solution": "Consider just one of these coins, with center P. It follows that the center Q of any other coin cannot lie within the coin of radius 2 with center P because it must be at least 2 units away. Thus, we construct all of these coins of radius 2, concurrent with each of the coins of radius 1. If the set of coins of radius 2 did not cover the rectangle entirely, then we could place a coin of radius 1 in this region, contradiction. Thus, the set of coins of radius 2 entirely covers the rectangle.\nWe now have 100 coins of radius 2 that entirely covers the rectangle. Scale this by a factor of 1/2 in both planar dimensions. Now we have 100 coins of radius 1 that entirely covers a rectangle that is a quadrant of the original rectangle. By placing four of these sets together, we get 400 coins of radius 1 that entirely covers the original rectangle."
+  },
+  {
+    "id": 1016,
+    "title": "Scaling a Square",
+    "difficulty": "medium",
+    "category": "discrete",
+    "Question": "On a table you have a square made of 4 coins at the corner at distance 1. So, the square is of size 11.  In a valid move, you can choose any two coin lets call them mirror and jumper. Now, you move the jumper in a new position which is its mirror image with respect to mirror. That is, imagine that mirror is a centre of a circle and the jumper is on the periphery. You move the jumper to a diagonally opposite point on that circle. With any number of valid moves, can you form a square of size 22? If yes, how? If no, why not?",
+    "Hint": "Invariance",
+    "Answer": "No!",
+    "Solution": "Note, that every valid move is reversible. That is if you make a move in one direction, the other direction is also a possibility. So, if you can scale a square of size 11 into a square of size 22, then you should also be able to shrink it into arbitrary small square. Say 1/2 x 1/2 or 1/1024 x 1/1024.\nSo, now we need to show that you cannot shrink the square. If we show that distance between any two coins is always greater than 1 unit, we are done. And here is the simplest part!\nImagine a grid on the 2-d plane. Let the coins be at (0,0) (0,1) (1,0) (1,1) forming a square of size 11. Our grid cells are of size 11. Note, that no matter how many moves you make, the coins will always have integer co-ordinates ( basically stays on the grid ). Since, the shortest distance on the grid is 1 unit, no two coins can have distance shorter than 1 unit. And we are done!"
+  },
+  {
+    "id": 1019,
+    "title": "Weird Sequences",
+    "difficulty": "medium",
+    "category": "general",
+    "Question": "What is/are the next term(s) in the sequence:\na) 1, 11, 21, 1211, 111221, ?\nb) 10, 11, 12, 13, 14, 20, 22, 101, ?, ?\nc) (This a sequence made by only 2 \\& 1): 2,2,1,1,2,1,2,2,1, ?, ?....",
+    "Hint": "a) base-change, b) count numbers,  c) count repetition",
+    "Solution": "a) 1, 11, 21, 1211, 111221, 312211, 13112221, 1113213211, ...\nThis is a Look-and-say sequence! To generate a member of the sequence from the previous member, read off the digits of the previous member, counting the number of digits in groups of the same digit.\nb) 10, 11, 12, 13, 14, 20, 22, 101, 1010, 1111111111\nThis is '10' written in different bases, from 10 to 1!\nc) This a sequence made by only 2 \\& 1: 2,2,1,1,2,1,2,2,1, ?, ?....\nThis is a version of Kolakoski sequence, and is its own run-length encoding. Each symbol occurs in a \"run\" of either 1 or 2 consecutive terms, and writing down the lengths of these runs gives exactly the same sequence. It is the unique sequence with this property except for the same sequence with extra '1' at start."
+  },
+  {
+    "id": 201,
+    "title": "Colored Runs of Cards",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "There are 26 black(B) and 26 red(R) cards in a standard deck. A run is number of blocks of consecutive cards of the same color. For example, a sequence RRRRBBBRBRB of only 11 cards has 6 runs; namely, RRRR, BBB, R, B, R, B. Find the expected number of runs in a shuffled deck of cards.",
+    "Hint": "Linearity of expectation",
+    "Answer": "27",
+    "Solution": "We form the answer for general deck of 2n cards, with n red cards and n black cards. Consider any sequence X1,X2..X2n (of R \\& B). Now define  Y1 = 1;\nYi = 1 if Xi and X(i-1) are of different colors\nYi = 0 otherwise.\nWe want to find E[Y1 + ..+ Y2n], using linearity of expectation, = E(Y1) +...+E(Yn). Now note that, E[Y1] = 1 and E[Yi] = E[Yj] for the rest (by symmetry)\nAlso E[Yi] = E(Y2) = P(X2 is diff from X1) =  (number of ways first two are RB or BR) / (Total number of orientations) = 2 * [ (2n-2)choose(n-1) ] / [ 2n choose n ] = n/(2n-1)\nAns = 1+(2n-1) * E[Y_i] = n+1\nThis is 27 for deck of 52 cards."
+  },
+  {
+    "id": 202,
+    "title": "Drunk Ant",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "An ant is standing on one corner of a cube \\& can only walk on the edges. The ant is drunk and from any corner, it moves randomly by choosing any edge! What is the expected number of edges the ant travels, to reach the opposite corner?",
+    "Hint": "Try to find the equivalent vertices for the distance yet to travel. This should give $4$ equivalent merged vertices, with $1$st being the start \\& the $4$th being the destination.",
+    "Answer": "$10$",
+    "Solution": "We can define $4$ equivalent states, based on the corner the Ant is at:\nStarting corner.\nCorner adjacent to the starting corner.\nCorner that shares an edge with the opposite corner.\nThe opposite corner.\nWe can represent the expected number of steps $E_i$ from each state as follows:\n$E_0 = 1 + \\dfrac{1}{3}(E_1 + E_1 + E_1)$\n$E_1 = 1 + \\dfrac{1}{3} (E_0 + E_2 + E_2)$\n$E_2 = 1 + \\dfrac{1}{3}(E_1 + E_1 + E_3)$\n$E_3 = 0$ (already reached the destination)\nSolving this we find $E_0 = 10$\nCalculations:\n$\\implies E_0 = 1 + E_1  ~~\\&~~ E_2 = 1 + 2/3 \\cdot E_1$\nSubstitute $E_0$ and $E_2$ in the middle equation.\n$\\implies 3E_1 = 3 + (1 + E_1) + 2 (1 + 2/3 E_1)$\n$\\implies 3E_1 = 4 + E_1 + 2 + 4/3 E_1$\n$\\implies 2/3 E_1 = 6 \\implies E_1=9 \\implies E_0 = 10$"
+  },
+  {
+    "id": 203,
+    "title": "Distance from North Pole",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "What is the expected distance of any point on Earth and the north pole? Take Earth radius 1.\nClarification: Shortest distance cuts through the sphere, instead of lying on surface.\nFurther thinking: Is this question same as choosing two random points on unit sphere and asking their expected distance?",
+    "Hint": "Imagine a ring of some thickness, whose distance from N is constant from all points on that ring. Get the average of all such rings.",
+    "Answer": "4/3",
+    "Solution": "2 * sin(x/2)is the distance of north pole from a point on the ring at angle x from the z axis. So, integrate from 0 to pi, (2 * pi * sin(x) * 2 * sin(x/2) dx) and divide by the total area which is 4 * pi.\nAnswer:4/3\nAnother approach is to imagine a horizontal ring of dy thickness at distance y from N (north pole).\nArea of ring = 2 * pi * dy\nProbability of choosing point on this ring = dy/2\nDistance of N \\& a point on ring = sqrt(2y)\nExp length = integral (y=0 to 2) of sqrt(2y) dy/2 = 4/3\nAnd yes, taking two random points on surface of sphere and asking their expected distance is same as this very question."
+  },
+  {
+    "id": 204,
+    "title": "Expected Breakup Length",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "A stick is broken into 3 pieces, by randomly choosing two points along its unit length, and cutting it. What is the expected length of the middle part?",
+    "Hint": "Selecting the random point from a small 'dt' length element is dt , as length of stick=1. Now use the definition of Expectation.",
+    "Answer": "1/3",
+    "Solution": "Double integral of |x-y|dxdy gives 1/3 as answer. This is same as one would expect from a broken pencil.\nPalak's Solution:\nIntegrate from 0 to 1, x * x/2 + (1-x) * (1-x)/2 = 1/3\nlogic: if one cut is at distance x from left, with probability x, the second cut comes before it, and expected length of middle piece is x/2.. Similarly with prob (1-x) it, middle piece is expected to have length (1-x)/2. Thus adding and integrating from 0 to 1."
+  },
+  {
+    "id": 205,
+    "title": "Messing with Envelops",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "There are $n$ letters and $n$ envelopes. You put the letters randomly in the envelopes so that each letter is in one envelope. (Effectively a random permutation of $n$ numbers chosen uniformly). Calculate the expected number of envelopes with the correct letter inside them.",
+    "Hint": "Use Indicator variables and the Linearity of Expectation",
+    "Answer": "1",
+    "Solution": "Let $X_i$ be the indicator random variable such that:\n$1$ if the $i$th letter ends up in the $i$th envelope.\n$0$ otherwise\n$E[X_i] = P(X_i = 1) = 1/n$ for any $i$\nlet $X$ be the number of letters that ended up in their respective envelopes.\nNow, $X$= $X_1 + X_2+ \\ldots +X_n$\n$E[X] = E[\\sum_{i=1}^{n} X_i]$\n$= \\sum_{i=1}^{n} E[X_i]$ (Using Linearity of Expectations)\n$=\\sum_{i=1}^{n} (1/n) = 1$\nTherefore, we expect on average one letter to be in the correct envelope."
+  },
+  {
+    "id": 206,
+    "title": "Collecting Lucky coupons",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "A soda company is holding a contest where everyone who collects one each of N different coupons wins some prize. You get a coupon with each purchase of a soda, and each coupon is equally likely. Whats the expected number of soda bottles you have to buy in order to collect all the coupons?",
+    "Hint": "Linearity of expectation",
+    "Solution": "Divide the whole process in to stages. Each stage ends with collecting a coupon which is new ( different from the coupons we already have )\nLet C_i be the random variable which denotes the number of coupons we buy in the stage i.\nLet C be the random variable which denotes the number of coupons we buy in order to get all n coupons\nNow,\nC= C_1 + C_2 + ... + C_n\nNote C_1 = 1;\nIn general, while we are during stage i , we already have with us (i-1) different coupons. So, the probability of getting a new coupon is p_i = n-(i-1)/n. Also note that each C_i is a Geometrically distributed random variable with success probability equal to p_i. So, E(C_i) = 1/p_i = n/(n-i+1).\nBy using Linearity of Expectations,\nE(C) = E(C_1) +E(C_2) + ...+E(C_n)\n= n(1/n + 1/(n-1)+ ... +1)\n~ nlogn."
+  },
+  {
+    "id": 207,
+    "title": "The Noodles",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "You have 100 noodles in your soup bowl. You are told to take two ends of some noodles (each end on any noodle has the same probability of being chosen) in your bowl and connect them. You continue until there are no free ends. What is the expected number of loops? What is the probability of making one large loop which includes every noodle?",
+    "Hint": "Expected number of noodles come from linearity of expectation. Probability comes from multiplying independent probabilities.",
+    "Solution": "First calculate expected number of loops:\nDenote X1 = identity variable, which takes value 1 every time a (long) noodle becomes a loop by connecting to its end, (if its own end is connected to some other noodle, then that other noodle's end will be considered). Thus, number of loops = X1 +...+ X100, thus, expected number of loops = E(X1) + ... + E(X100). This will give answer = 1/(2N-1) + 1/(2N-3) + ... + 1/3 + 1\nwhere N = 100. This formula can also be proved using induction.\nCalculating Probability of single large loop:\nIf you followed last result, this one is simple, this time all the identitiy variables are zero except last one. Thus probability is [1 - 1/(2N-1)] * [ 1 - 1/(2N-3)] * ... * [1-1/3]\n= Product ( i = 2 to N) [ (2i-2) / (2i-1)]"
+  },
+  {
+    "id": 208,
+    "title": "Distinct Number Draws",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "Given the set of numbers from 1 to n: { 1, 2, 3 .. n } We draw n numbers randomly (with uniform distribution) from this set (with replacement). What is the expected number of distinct values that we would draw?",
+    "Hint": "Linearity of expectation",
+    "Answer": "E(n) = n[1-(1-1/n)^n]",
+    "Solution": "Notice that number of distinct points in the produced set is same as number of distinct points selected from the given set {1..n} . For that we denote indicator function Si, that is, Si = 1 if the interger i is taken into produced set.\nLet S denote the number of distinct points selected, S = S1+..+Sn\nE(S) = E(S1) +...+ E(Sn)\nand E(Si) = 1 * P(Si) = 1 - (Probability that 'i' is not chosen in any draw)\n= 1 - ( Prob that is i is not chosen in one 1st draw)^n = 1 - (  1 - 1/n )^n\nThus E(S) = n * ( 1 - ( (n-1) / n)^n )"
+  },
+  {
+    "id": 209,
+    "title": "Greed for an ACE",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "What is the expected number of cards that need to be turned over in a regular 52-card deck in order to see the first ace?",
+    "Hint": "Hint: the locations of the four aces in the deck divide it into the five groups X1, ...,X5.",
+    "Answer": "53/5",
+    "Solution": "Define X1,X2...X48, such that Xi = 1 if ith card turns over before 4 aces, 0 otherwise. Thus, total number of cards turned to see first ace = 1 + sum (Xi)\nusing linearity of expectation, E(X) = 1 + sum ( E(Xi))\nNow consider the ith card and the four aces, all the orders are equally likely: X,A,A,A,A Or A,X,A,A,A, or 3 others. They are equally likely when we have no knowledge about position of these Aces with respect of the deck. Hence we have 5 equally likely slots for ith card: 1 A 2 A 3 A 4 A 5. We are interested in 1st slot.\nHence E(Xi) = 1/5 for all i = 1 to 48\nThus E(X) = 1 + 48/5 = 53/5 = 10.6\nThis can be done by recursive equation  f(n) = (4/n) * 1 + ((n-4)/n) * (1+f(n-1)), where f(n)=expected cards to flip in a deck of n cards, but I definitely can't solve this without a computer.\nA shorter explanation is to consider the 52 cards uniformly distributed over (0,1), so on average they're at k/53 for k=1,2,3,...,52. The four aces are on average at 1/5, 2/5, 3/5, 4/5. So 0.2=k/53 implies k=10.6, done!"
+  },
+  {
+    "id": 210,
+    "title": "Random point on disk",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "$x$ \\& $y$ are two random points selected uniformly between $0$ \\& $1$. Using them, create a point uniformly random in a circle of radius $1$. (uniform means that the probability density is constant)",
+    "Hint": "Convert Cartesian coordinates to Polar coordinates. And the area of a circle grows with the square of its radius.",
+    "Answer": "$\\theta = 2 \\pi x$ and $r = \\sqrt{y}$, then take the point as $(r \\cos(\\theta),r \\sin(\\theta))$"
+  },
+  {
+    "id": 211,
+    "title": "Enclosing The Center",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "N points are chosen at random on the circumference of a circle. A convex $n$-gon (n sided polygon) is drawn by joining these n points. What is the probability that the center of circle lies inside the region of $n$-gon?",
+    "Hint": "If the polygon contains the center, the longest distance between any two points on the circumference will be less than $\\pi$.",
+    "Answer": "$1- nP$ where $P = 1/{2^{n-1}}$",
+    "Solution": "For a polygon inscribed in a circle to exclude the center of that circle, there must be a straight line that can be drawn through the center of the circle such that all vertices (points) of the polygon are on one side of that line. In terms of the circle, this line is a diameter, and all the points are within a semi-circle. Thus, the polygon excludes the center if and only if all points are within a semi-circle. This is easier to check.\nSuppose we lock the first point (at random), imagine a semi-circular arc that starts from this point, in a clockwise direction around the circle. We want to know if the next $n-1$ points lie on this arc. Since the probability of each next point is uniformly random along the entire circumference, the probability is $1/2$ that each point lies within this imaginary semi-circle. Thus, the probability that all those $n-1$ points lie on this semi-circle is $P = \\dfrac{1}{2} \\cdot \\dfrac{1}{2}    \\cdot ... \\cdot \\dfrac{1}{2} =\\dfrac1{2^{n-1}}$.\nNot all points may lie within the semi-circle starting from the first point. It is true that if the polygon excludes the center, then certainly all points are within some semi-circle, but which one? Let us define the semi-circle as an arc that starts from some point of the polygon in a clockwise direction. This definition ensures that only one such semi-circle can satisfy the desired constraints. Suppose $X_i = 1$ if the semi-circle starting from point $i$ contains all the other points, and $X_i = 0$ otherwise. Then, $P(X_1 = 1) = P$.\nNote that the probability of this event is identical for each $i$ because when we observe the semi-circle starting from the $i$th point, all the other $n-1$ points are just random points on the circumference, hence $P(X_1 = 1) = P(X_i = 1) = P(X_n = 1) = P$.\nWe want to know the probability that any one of those start-points satisfies the condition, i.e. $P(X_1 = 1 \\cup X_2 = 1 \\cup ... \\cup X_n = 1)$.\nNote that if any $X_i$ is $1$, then all other $X_i$'s are $0$. This is because of the way we defined our semi-circle to start from one of the points. If we start the semi-circle for any other point $j \\ne i$, then the $i^{th}$ point lies outside the semi-circle, i.e. $X_{i}=1 \\implies X_{j} = 0, \\forall j \\ne i$. Hence, by definition, $(X_i = 1)$'s are disjoint events, and hence the probability of union is the sum of individual probabilities.\nThus, probability of center-exclusion = $P(X_1 = 1 \\cup X_2 = 1 \\cup ... \\cup X_n = 1) = P(X_1 = 1) + ... + P(X_n = 1) = n * P$\nHence the probability that the polygon includes the center of the circle is $1 - nP$ where $P = \\dfrac{1}{2^{n-1}}$\nFinal answer $1-\\dfrac{n}{2^{n-1}}$"
+  },
+  {
+    "id": 213,
+    "title": "Sum To One",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "On pressing a button, a random number is generated uniformly between 0 \\& 1. You keep on generating these numbers until their sum exceeds 1. What is the probability that you need to press the button more than n times? What is the expected number of times you need to press the button?",
+    "Hint": "Probability by conditioning",
+    "Answer": "Probability: 1/n! ; Expected times:  e",
+    "Solution": "Probability of more than n throws is equivalent to saying X1+..+Xn $\\le$1, this is the volume of n dimensional symplex from origin, its volume is 1/n! and can be proved by induction. This can be used to calculate expected number of button presses, sum( 1/n! * n ) = sum( 1/(n-1)!) = e^1\nOtherwise, set up a (lag)differential equation for f(x), the expected number of draws needed for the sum to exceed x. For x=0,f(x)=1. For x$>$0, suppose a draw gave number t, then f(x)= 1 + integral (t=0 to x)f(x-t)dt, which is same as f(x) = 1 + integral(t=0 to x) f(t)dt, differentiate wrt x, we get f'(x) = 0 + f'(x). This has the solution f(x)=e^x and x=1 gives e.\nTo take derivative, we used  leibniz integral rule:\nd/dx  ( integral( a(x) to b(x) ) f(t) dt = f(b(x)) * b'(x) - f(a(x)) * a'(x) = f(x) * 1 - f(x) * 0 = f(x)"
+  },
+  {
+    "id": 215,
+    "title": "Random Walk",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "You are initially located at the origin on the $x$-axis. You start a random walk with an equal probability of moving left or right, one step at a time. What is the probability that you will reach point $a$ before reaching point $-b$?\nAssume $a$ and $b$ are natural numbers. $a $>$1; b $>$ 1$",
+    "Hint": "Consider the expected value of the position at the end of the game.",
+    "Answer": "$b/(a+b)$"
+  },
+  {
+    "id": 216,
+    "title": "Left Some Candies",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "You are taking out candies one by one from a jar that has $10$ red candies, $20$ blue candies, and $30$ green candies in it. What is the probability that there is at least $1$ blue candy and $1$ green candy left in the jar when you have taken out all the red candies?\nAssume that the candies of the same color are indistinguishable from one another.",
+    "Hint": "Consider the sequences of 60 candies, in which red candies finish before blue and green.",
+    "Answer": "7/12",
+    "Solution": "$\\dfrac{30}{60} \\cdot \\dfrac{20}{30}+\\dfrac{20}{60} \\cdot \\dfrac{30}{40} =\\dfrac{7}{12}$\nWe will reach this formula by considering the complete sequence of 60 candies.\nAny scenario that satisfies the given question will match one of the following two:\nThe  $60^{\\text{th}}$ candy in this sequence is green, and some blue candy exists before this and after the last red candy.\nThe $60^{\\text{th}}$ candy is blue, and some green candy exists before this and after the last red candy.\nIn the first scenario, let $G$ be the event that the  $60^{\\text{th}}$ candy is green. Let $B^*$ be the event that there is a blue candy before that but after the last red. Since these two events are not independent, we want to calculate:\n$P(G \\cap B^*) = P(G) \\cdot P(B^* | G)$\n$P(G) = 30/60$ because the $60^{\\text{th}}$ candy will be one of 30 greens, and there are a total of 60 choices.\n$P(B^* | G)$ is the probability of finding a blue candy after the last red, given that the $60^{\\text{th}}$ candy is green. Now remove all green candies from consideration, there are 30 candies (10 red \\& 20 blue). Imagine a random sequence of these 30 candies (it might be scattered anywhere from position 1 to $59$, but still, it is a random sequence of 30 candies only). The probability that the $30^{\\text{th}}$ one of these is blue is $20/30$.\nThus $P(G \\cap B^*) = (30/60) \\cdot (20/30)$.\nSimilarly, for the second scenario, let $B$ be the event that the $60^{\\text{th}}$ candy is blue and let $G^*$ be the event that there is a green candy before that but after the last red. We want to calculate $P(B \\cap G^*) = P(B) \\cdot P(G^* | B) = (20/60) \\cdot (30/40)$\nSince these two scenarios are mutually exclusive, the probability of union is the sum of these probabilities.\nHence the answer: $1/3 + 1/4 = 7/12$\nNot convinced? Here is a simulation script that shows the probability converging to 7/12.\nColab Script"
+  },
+  {
+    "id": 217,
+    "title": "Catching the Submarine",
+    "difficulty": "hard",
+    "category": "strategy",
+    "Question": "An aircraft hovers above sea, trying to catch a submarine moving with a constant velocity under the sea. The submarine is completely invisible, but using a human radar only once, the aircraft knows the exact location of submarine under the sea. The direction of submarine is unknown, but constant. The aircraft can move at twice the speed of submarine. As soon as the aircraft is just vertically above the submarine, Aircrafet can magnetically pick it up. How does the aircraft catch the submarine? How much time ill it take?",
+    "Hint": "The locus of submarine from its spotted location is a circle of radius (speed of sub) * (time passed). We only need to move around this locus for some time.",
+    "Solution": "Let speed of plane be 2s, submarine: s, original distance d\nLocus of submarine after time t is circle of radius s * t centered at original location of submarine. Thus the plane moves 2/3 distance towards submarine, and then spirals out by increasing radius with speed 's'. The submarine is caught after one round.\nFor General case, with speeds p $>$ s, see Palak's Answer:\nLet Op, Os be the initial positions of the plane and the submarine, resp. For time t0 = d/(s+p), the plane will move towards Os in the OpOs direction. After that, with Os as the origin, the plane will maintain a constant velocity of s along the radial direction. Thus, at an angle theta from OpOs, tangential displacement in time dt is sqrt(p^2-s^2) * dt = r * d(theta) = s * t * d(theta) =$>$ dt/t = s/sqrt(p^2-s^2) * d(theta). Integrating t from t0 to tf, and theta from 0 to 2 * pi, we get tf = t0 * exp[2 * pi * s/sqrt(p^2-s^2)] = [d/(s+p)] * exp[2 * pi * s/sqrt(p^2-s^2)].\nNote that the plane can be vertically above the submarine any time between t0 and tf, depending on the direction theta of the velocity of the submarine wrt OpOs, thus making tf the worst case time."
+  },
+  {
+    "id": 218,
+    "title": "Catching the Spy",
+    "difficulty": "hard",
+    "category": "strategy",
+    "Question": "A spy is located on a one-dimensional line.  At time 0, the spy is at location A.  With each time interval, the spy moves B units to the right (if B is negative, the spy is moving left).  A and B are fixed integers, but they are unknown to you.  You are to catch the spy.  The means by which you can attempt to do that is:  at each time interval (starting at time 0), you can choose a location on the line and ask whether or not the spy is currently at that location.  That is, you will ask a question like \"Is the spy currently at location 27?\" and you will get a yes/no answer.  Devise an algorithm that will eventually find the spy",
+    "Solution": "Here is a detailed solution with images\nAnd here is a short solution:\nSince integer 2-tuples $(x,y)$ are countable, there exists a function $f:N \\rightarrow N*N$ such that $f$ covers all integer 2-tuples.\nLet $f(n)=(f_1(n),f_2(n))$. The algorithm will be to check for location $f1(n) + n\\cdot f_2(n)$ at time instant $n$.\nGiven $A$ and $B$, there exists $n_0$ such that $f(n_0)=(f_1(n_0),f_2(n_0))=(A,B)$, and thus at time instant $n_0$ we will be checking for location $f_1(n_0)+n_0 \\cdot f_2(n_0)$ which is $= A+ B \\cdot n_0$ - the actual location of the spy."
+  },
+  {
+    "id": 220,
+    "title": "Pure Gold",
+    "difficulty": "hard",
+    "category": "strategy",
+    "Question": "You are given N coins which look identical (assume N = 2^k). But actually some of them are pure gold coins (hence are heavy) and the rest are aluminum coins with thin gold plating (light). You are given one beam balance with two pans. What is the number of weighing required to separate the gold from fake coins? (all gold coins have equal weights \\& all fake coins too have the same weight)",
+    "Hint": "Divide and conquer",
+    "Solution": "It takes about (log N)^2 operations:\nDivide the set of 2^k with d heavy coins into two sets, each with 2^(k-1) coins with floor(d/2) heavy coins. If we can do this, we can determine the number of heavy coins in O(log n)^2 operations.\nDividing the set can be done in O(log n). (*Later)\nSo, T(n) = T(n/2) + O(log n)\nT(n) = O(log^2 n).\nTo be exact, this is k*(k+1)/2 . where k = log N\n(*Sub-Algorithm)\nDivide the set into two sets A and B of equal number of coins. Let A greater than B and to make both side of equal weight, I need to shift few coins from A to B and equal number of coins from B to A. So divide A into A1 and A2, and B into B1 and B2. Move A2 from A into B and B1 from B into A now if (A1,B1) is greater than (B2,A2) then I have not moved enough coins from A into B so as to make B part heavy enough hence you divide A1 into A11,A12 and move A12 in B side similarly u move B21 into A side on the other hand if (A1,B1) is less than (A2,B2) I have more than enough coins from A into B hence move B12 back into B and A21 back into A now measure again. Do it so on...\nNote that we are doing this in O(log n) as each time the number of coins we are moving is reduced by half. So, In O(log n), we are done.\nTo prove that solution always exists, we do it by induction:\ndifference in the number of heavy coin after kth iteration cannot be more than 2^(n-1-k)\nSo, after n-1th iteration, it can be more that 1 coin. Hence, done. :)"
+  },
+  {
+    "id": 222,
+    "title": "Counter Strike",
+    "difficulty": "hard",
+    "category": "strategy",
+    "Question": "N undercover agents have been found in don's lair. Less than half of them are terrorists and the rest are anti-terrorists. The nature of their job is so secret that there is no proof what so ever to testify who is who. Although each of them knows who was actual terrorist and who was anti because they worked in teams. A query consists of asking person i if person j is Anti. Anti will always speak truth but a terrorist may lie to confuse you. The goal is to find out one anti in fewest queries.",
+    "Hint": "It  can be done in less than N queries. End of a chain is testified by one anti somewhere in the middle.",
+    "Solution": "Please note that this question cannot be solved with any algorithm if terrorists are more than or equal to anti, because terrorists can plan to always lie.\nAnother solution taking only N-1 queries:\nWe will try to find a chain of persons (i1,i2,i3....im) such that each ij is queried about i(j+1) and answer is correct. Note that if such chain contains an anti then last person in the chain would be anti. So query person 1 about 2. If answer is yes query person 2 about 3. continue till answer is correct. suppose at some point person i when queried about person j says wrong, in that case remove person i and j from the chain, and continue query process by querying predecessor of i about successor of j. Here note that when we remove person i and j from the chain at-least one of them must be faulty. here for each person except the first one, we are querying once. Hence N-1 comparison in worst case. Think about the best case using this algorithm."
+  },
+  {
+    "id": 223,
+    "title": "Sharing a Secret",
+    "difficulty": "hard",
+    "category": "discrete",
+    "Question": "A group of 5 people want to keep their secret document in a safe. They want to make sure that in future, only a majority ($>$=3) can open the safe. So they want to put some locks on the safe, each of the locks have to be opened to access the safe. Each lock can have multiple keys; but each key only opens one lock. How many locks are required at the minimum? How many keys will each member carry?",
+    "Hint": "For each group of 2 ppl, there must be a lock which none of them have a key to.",
+    "Answer": "10 locks, 6 Keys.",
+    "Solution": "For each group of 2 ppl, there must be a lock which none of them have a key to. But the key of such a lock will be given to the remaining 3 ppl of group. Thus, we must have atleast 5C2 = 10 Locks. Each lock has 3 keys, which is given to unique 3-member subgroup. So each member should have 10*3/5 = 6 keys."
+  },
+  {
+    "id": 224,
+    "title": "Weights Reckoning",
+    "difficulty": "hard",
+    "category": "discrete",
+    "Question": "We have a beam balance (with two pans to compare weights) and a positive integer N. How do we select fewest number of pebbles to weigh all possible integers from 1 to N",
+    "Solution": "We will require the set (1,3,9.....3^x )\nwhere x is lowest integer with 3^x $>$ N. This is true because each number now has exactly one ternary representation. Any 2 * 3^i can always be represented as 3^(i+1) - 3^i. So, there is a unique way of representing a number in the form of sigma s_i * 3^i where s_i belongs to {0, 1, -1}. So, this is optimal\nVerify that this can be used to weigh all integers from 1 to N\nNumber of pebbles = log_{base:3} (2N+1)\nIf each weight w_i has k copies, then 2k+1 combinations can be weighed using them (from -k * w_i to 0 to k * w_i). So, if we choose w_i = (2k+1)^{i-1}, i=1...p, then everything till k*((2k+1)^p - 1)/((2k+1)-1) = ((2k+1)^p-1)/2 can be weighted, thus requiring p=log_{2k+1} (2N+1) number of distinct weights."
+  },
+  {
+    "id": 225,
+    "title": "Gas Stations on Circular Trek",
+    "difficulty": "hard",
+    "category": "discrete",
+    "Question": "Several gas stations on a circular trek have between them just enough gas for one car to make a complete round trip. Prove that if you start at the right station with an empty tank you shall be able to make it all the way around.",
+    "Hint": "Induction",
+    "Solution": "Take N=2 gas stations. Assume their capacities are x1 and x2 (in terms of distance). Now, x1+x2 = 1. Assume y1 and y2 be clockwise distances from 1 to 2 and 2 to 1 (clockwise), y1+y2 = 1. Hence we cant have x1$<$y1 and x2$<$y2 both. Thus, let x1 $>$= y1. In this case we start with station 1 and complete the journey. Assume the path is possible for N=K stations, we want to prove for N = K+1 stations, using same argument as above, xi$>$=yi for some i, and hence reaching xi with zero fuel ensures reaching x(i+1). Thus we merge xi and x(i+1), and the problem is reduced to N=K stations, which we assumed!\nAnother method is to imagine having a big tank with enough gas for a round trip and enough room for going through the motions of emptying every gas station on your way. Start at any station and mind to record the amount of gasoline on reaching gas stations on your way around. At the end of the trip, when you pull into the station of departure with the original amount of gas, check your list. The station marked with the least number is the one where you want to start on an empty tank."
+  },
+  {
+    "id": 226,
+    "title": "Bricking Box",
+    "difficulty": "hard",
+    "category": "discrete",
+    "Question": "Can you pack 53 bricks of dimensions 1x1x4 into a 6x6x6 box? The faces of the bricks are parallel to the faces of the box",
+    "Hint": "See its cousin called Domino Covering in which two opposite corners of a checkerboard are removed.",
+    "Answer": "No!",
+    "Solution": "Divide the volume of 6x6x6 box into 2x2x2 mini cubes. Imagine each of these mini cubes is either fully red or fully blue such that it forms a 3D checkerboard pattern on the box. This will restrict 14-13 restriction on cube colors, say 14 blue and 13 red. Now, putting bricks into box, parallel to faces, each brick will be half blue and half red, so 52 bricks fill all the red cubes and there is no way to place a 53rd brick."
+  },
+  {
+    "id": 1017,
+    "title": "Consecutive sums",
+    "difficulty": "hard",
+    "category": "discrete",
+    "Question": "An optimist and a pessimist are examining a sequence of real numbers. The optimist remarks, Oh jolly! The sum of any eight consecutive terms is positive! But the pessimist interjects, Not so fast, the sum of any five consecutive terms is negative. Can they both be right? Atmost how large can this sequence be?",
+    "Hint": "One easy proof is to construct rows, starting from ai, and satisfying one of the sum properties - optimist or pessimist. The column sum can follow the other property. Try making a contradiction.",
+    "Answer": "11",
+    "Solution": "Suppose such a sequence with terms {ai} has length 12\na1+a2+...+a5$<$0\na2+a3+...+a6$<$0\n..\na8+a9+...+a12$<$0\nNote that rows sums are negative and column sums are positive. This is contradiction to the total sum! So max length of sequence is 11. This sequence can be constructed but we wont cover the instruction. Example: 1 at positions 1,3,4,6,8,9,11 and -1.6 at positions 2,5,7,10."
+  },
+  {
+    "id": 1018,
+    "title": "Intersecting Pillars",
+    "difficulty": "hard",
+    "category": "discrete",
+    "Question": "We want to construct a structure made as follows: imagine that two long cylindrical pillars each with radius 1 intersect at right angles and their centers also intersect. What is the volume of this intersection?",
+    "Answer": "16/3",
+    "Solution": "If you cut the intersection by a horizontal plane at distance z from center, the cut will be a square with side-length 2 * sqrt( 1-z^2). Integrate to get volume 16/3.\nAnother way is to imagine the largest possible sphere inscribed at the center of intersection. The sphere should have a radius of 1. At each cut perpendicular to the z-axis, the circle from the sphere is inscribed in the square from the intersection as well, So Area of cut-circle = (Pi/4) * Area of cut-square. This is true for all z, hence Volume of sphere = (Pi/4) * Volume of Intersection, this also gives 16/3"
+  },
+  {
+    "id": 1020,
+    "title": "Color Switches",
+    "difficulty": "hard",
+    "category": "probability",
+    "Question": "You are given an urn with 100 balls (50 black and 50 white). You pick balls from urn one by one without replacements until all the balls are out. A black followed by a white or a white followed by a black is \"a colour change\". Calculate the expected number of colour-changes if the balls are being picked randomly from the urn.",
+    "Hint": "Linearity of expectation",
+    "Answer": "50",
+    "Solution": "Each time we draw, there could be a possible color-switch, except the first time we draw, hence 99 possible switches.\nLet $X_i$ be an indicator variable, value 1 if $i_{th}$ position has a colour change and zero otherwise, note that $i$ goes from $1$ to $99$.\nTotal number of switches, $S = X_1 + X_2 + ... + X_{99} = \\sum_{i=1}^{99} X_i$\nThe expected number of color switches is denoted by the sum of these variables, i.e $E[S] = E[X_1 + X_2 + ... + X_{99}]$\nLinearity of expectation states that the expected value of the sum of random variables is equal to the sum of their individual expected values.\nHence the answer is $E[S] = E[X_1] + E[X_2] + ... + E[X_{99}]$\nNote that each $X_i$ is identical, and the expected value is equal for each $i$, i.e, $E(X_k) = E(X_1) $\nHence $E[S] = E[X_1] + ... + E[X_n] = \\sum_{i=1}^{99} E[X_1] = 99 \\cdot E[X_1] $\nAlso, we can calculate the expected value, $E[X_1] = 1 \\cdot P(X_1 = 1) + 0 \\cdot P(X_1 = 0) = P(X_1 =1) $\nProbability of any given color change is (either first is R second is B, or first is B and second is R) $= P(X_1 = 1)= \\dfrac{50}{100} \\cdot \\dfrac{50}{99} + \\dfrac{50}{100} \\cdot \\dfrac{50}{99} = 50/99$\nFinally, the answer is $ E[S] = \\sum_{i=1}^{99} E[X_i] = 99 \\cdot E[X_1] = 99 \\cdot 50/99 = 50$\nNote:\n$X_i$'s are not independent, but since all the balls are drawn randomly, the probability-distribution is identical for each draw. For instance, if you are given no information about the previous colors, and I ask 'what is the probability that 5th draw has a color change?', your answer will not depend on '5', instead the answer will be same for any index."
+  },
+  {
+    "id": 221,
+    "title": "Game of Divisors",
+    "difficulty": "deadly",
+    "category": "strategy",
+    "Question": "Two immensely intelligent players, A \\& B, engage in a game, the rules of which are as follows. For a natural number $N$, the board consists of numbers from $1$ to $N$. Each player takes turns to strike off a (new) number from the board. But, to make sure $N$ doesn't affect who wins, there is an added rule. Once you strike off a number, you also have to strike off all its divisors in that same chance, irrespective of whether any of those divisors were already marked. The player to strike off the last number on the board wins.\nCan A construct a winning strategy?\nNote: The question asks for the existence of the strategy, not to devise the strategy itself.",
+    "Hint": "Can one player copy the strategy of the other?",
+    "Answer": "For a given $N$, either $A$ has a winning strategy or $B$. If $B$ has the strategy, then $A$ can strike 1 and copy $B$'s strategy.",
+    "Solution": "There is no simple winning strategy, based on the initial number $N$, that A can use to win the game. We'll use the common strategy stealing argument.\nDeterminism\nThe game can be represented as a tree, where each node represents a possible state of the game, and the children represent valid moves to the next states.\nFor instance, for $N=5$, the root node is (5, 4, 3, 2, 1). There will be $N=5$ children nodes directly from the root node, and so on.\nLet \"level\" be the number of turns completed so far.\nAt level $0$, we have the root node. All the states that can be reached by striking one number (and its divisors) are at level 1. And so on.\nThe height of the tree is at most $N$ (finite).\nMany nodes might hold the same state. All the leaf nodes look like empty sets where all numbers are struck off. (5, 4, 3, 2, 1). If this node is at an odd level then player $A$ has won. Otherwise, the player $B$ has won.\nLet's color our game tree to represent the winning player in each possible end state. We color a leaf node \"red\" if the end state it represents is a win for Player $A$, and blue if it's a win for Player $B$. All leaf nodes at odd levels are red. And those at even levels are blue.\nNote that both players will try to move rationally toward their favored colored children nodes. Hence we can propagate these colors up.\nWe consider the following cases:\nIf all children of a node are red, then that node itself becomes red, regardless of the level (odd or even). Same for blue.\nIf a node has both red and blue children, it depends on the player. If it is at an even level, then it is Player $A$'s turn. Otherwise, Player $B$ is in control. If a node at an even level has at least one red child node, then we can color this node as red, and delete the blue children nodes. This is because Player $A$ will rationally move towards the winning state only. Similarly, we can propagate the blue nodes.\nThus, we can completely color the entire tree including the root node. It will either be entirely red or entirely blue.\nThis means that if both the players are rational geniuses, the winner is predetermined from the value of $N$.\nExistence of a Winning Strategy\nNow, we examine the color of the root node. If it's red, Player $A$ has a winning strategy right from the start. But can it be blue?\nLet's investigate this in detail.\nFrom the root node, there can be $N$ children, associated with striking each corresponding number. Consider all children associated with strike the number $i$, where $i$>$1$. If any one of these children is red, then the root node must be red. But if all are blue, that means that Player $B$ can force a win from any of these states. In other words, regardless of what player $A$ strikes ($2$ to $N$), player $B$ can push the game into a guaranteed win for player $B$.\nBut wait! There's a special move Player $A$ can make: striking out 1. Thus, Player $B$ is put into the same position Player $A$ was in at the start. From here, player B can choose to strike a number from $2$ to $N$, and player $A$ can force a win from here on, by copying the strategy of player $B$.\nThe special state (1, 2,..., N) is only accessible from the root node. Because of an extra node, all the level numbers switch from odd to even and vice versa. Incidentally, this subtree will look exactly like the root tree with reverse colors (and also with one subtree cut-off, corresponding to this node). Thus, the root of the subtree representing this new game state is red because all the nodes from this point forward are red.\nIn conclusion, Player $A$ always has a winning strategy in the Game of Divisors. By either making a move that leads directly to a winning game state or by striking out 1 and then mirroring Player $B$'s ideal moves to force a win.\nThis is a non-constructive strategy.\nScript\nUsing a script to generate the first move for a few values of $N$.\nFind the Colab Script here.\n$N$\n     First move\n1\n1\n2\n2\n3\n1\n4\n2\n5\n4\n6\n6\n7\n1\n8\n7\n9\n7\n10\n6\nIndeed, the first player always wins, but has to often start by striking  $1$."
+  },
+  {
+    "id": 1008,
+    "title": "Bullets of Fate",
+    "difficulty": "deadly",
+    "category": "probability",
+    "Question": "In a room stand $N$ armed and angry people. At each chime of a clock, everyone simultaneously spins around and shoots a random other person. The persons shot fall dead and the survivors spin and shoot again at the next chime. Eventually, either everyone is dead or there is a single survivor.\nAs $N$ grows, what is the limiting probability that there will be a survivor?\nWarning: I could not solve it. The solution only shows what I tried.",
+    "Solution": "I have tried the following scripts\nSimulation Script\nBrute Forcing Script\nSimulation with Dynamic Programming\nFollowing is the pattern.\nIt appears to be moving towards 0.5 but I do not have any proof or any intuitive logic as to why.\nAlso, not sure why these waves appeared, and why the wavelength is expanding."
+  },
+  {
+    "id": 1009,
+    "title": "Clan Size",
+    "difficulty": "deadly",
+    "category": "probability",
+    "Question": "The people in a country are partitioned into clans.  In order to estimate the average size of a clan, a survey is conducted where 1000 randomly selected people are asked to state the size of the clan to which they belong.  How does one compute an estimate average clan size from the data collected?",
+    "Solution": "This is more of a puzzle-to-ponder rather than a puzzle to learn. In my opinion, best estimator for average is sum( n )/ sum( \\#n/n), where \\#n is the number of people with clan size as 'n', and this sum is over all the values of 'n' we receive."
+  },
+  {
+    "id": 1012,
+    "title": "Prisoner's Hat (Infinity)",
+    "difficulty": "deadly",
+    "category": "strategy",
+    "Question": "A countably infinite number of prisoners, each with an unknown and randomly assigned red or blue hat line up single file line. Each prisoner faces away from the beginning of the line, and each prisoner can see all the hats in front of him, and none of the hats behind. Starting from the beginning of the line, each prisoner must correctly identify the color of his hat or he is killed on the spot. As before, the prisoners have a chance to meet beforehand, but unlike before, once in line, no prisoner can hear what the other prisoners say. The question is, is there a way to ensure that only finitely many prisoners are killed?",
+    "Solution": "It uses Axiom of choice in a special way. Before night of execution, prisoners will create some equivalent classes among the set of all possible infinitely long binary strings. Let us say two infinite strings s1 and s2 are related, if they differ at finitely many places, and are same otherwise. This creates the equivalence relation. Thus they create all equivalence class. From each class, we mark one representative string.\nNow, a person pi looks ahead, and instantly knows his equivalent class \\& recalls the representative string S. When his turn comes, he speaks the ith digit of S as his guess. Since S and actual (current) string only differ upto a finite (say N) number of position. Thus only atmost N people may die using this technique.\nNow, first person will count number of places S differs from current string, and answer it in modulo 2. Based on answer of first person, second person can deduce his hat color. now the third person can deduce his color and so on. Except possibly for the first person, everyone will guess correctly."
+  }
+]

@@ -14,24 +14,53 @@ logger = logging.getLogger("puzzler")
 logger.setLevel(logging.DEBUG)
 
 def extract_text(text:str, puzzle:dict):
-    first_half, second_half = text.split("Answer\n")
-    
+    halves = text.split("Answer\n")
+    first_half = halves[0]
+    second_half = 'Answer\n'.join(halves[1:])
+
     # Extract Question and Hints
     first_splits = first_half.split("Hint\n")
     puzzle["Question"] = first_splits[0].split("Question\n")[1].strip()
     if len(first_splits) == 2:
         puzzle["Hint"] = first_splits[1].strip()
-    
+
     # Extract Answer and Solution
     second_splits = second_half.split("Solution\n")
     puzzle["Answer"] = second_splits[0].strip()
     if len(second_splits) == 2:
         puzzle["Solution"] = second_splits[1].strip()
-    
+
     for key in ["Question", "Hint", "Answer", "Solution"]:
         if (key in puzzle.keys()) and (len(puzzle[key]) == 0):
             puzzle.pop(key)
 
+def clean_text_for_latex(text):
+    # Removes extra line spaces
+    text = text.replace('\n\n','\n')
+    text = text.replace('\n\n','\n')
+    text = text.replace('\n\n','\n')
+
+    # Encodes extra signs
+    text = text.replace('\%','%')
+    text = text.replace('\&','&')
+    text = text.replace('\#','#')
+    text = text.replace('%','\%')
+    text = text.replace('&','\&')
+    text = text.replace('#','\#')
+
+    # Encode comparision symbols
+    text = text.replace('<=','$\le$')
+    text = text.replace('<','$<$')
+    text = text.replace('>','$>$')
+    text = text.replace('>=','$\ge$')
+
+    # [Todo] Make $<text> to \$<text>
+    # [Todo] Make <text>_<text> to $<text>_<text>$
+    # [Todo] Make <text>^<text> to $<text>^<text>$
+
+    # Normalizes text to ascii
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
+    return text
 
 async def get_text(session:aiohttp.ClientSession, puzzle: dict):
     async with session.get(f"https://brainstellar.com/page-data/puzzles/{puzzle['difficulty']}/{str(puzzle['id'])}/page-data.json") as r:
@@ -44,18 +73,11 @@ async def get_text(session:aiohttp.ClientSession, puzzle: dict):
             for tag in soup.find_all('span'):
                 if tag.find('annotation'):
                     tag.string = '$' + tag.find('annotation').string + '$'
-            text = soup.get_text()
-            text = text.replace('\n\n','\n')
-            text = text.replace('\n\n','\n')
-            text = text.replace('\n\n','\n')
-            text = text.replace('\%','%')
-            text = text.replace('\&','&')
-            text = text.replace('\#','#')
-            text = text.replace('%','\%')
-            text = text.replace('&','\&')
-            text = text.replace('#','\#')
-            text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
-            extract_text(text, puzzle)
+            text = clean_text_for_latex(soup.get_text())
+            try:
+                extract_text(text, puzzle)
+            except:
+                print(f"Failed extracting puzzle - {text}")
             return puzzle
 
 # Puzzle structure: {'frontmatter': {'puzzleId': 1, 'title': 'Rolling the bullet', 'difficulty': 'easy', 'category': 'probability'}}
@@ -70,7 +92,7 @@ async def get_and_store_puzzles(puzzles: list):
     coros = []
     for puzzle in tqdm(puzzles):
         coros.append(get_text(session, puzzle))
-    
+
     logger.info("Starting async loop")
     extracted_puzzles = await aio.gather(*coros, return_exceptions=False)
     await session.close()
@@ -89,7 +111,7 @@ def get_all_puzzles():
         for puzzle in tqdm(puzzles):
             puzzle_list.append({
                 "id": puzzle["frontmatter"]["puzzleId"],
-                "title": puzzle["frontmatter"]["title"],
+                "title": clean_text_for_latex(puzzle["frontmatter"]["title"]),
                 "difficulty": difficulty,
                 "category": puzzle["frontmatter"]["category"],
             })

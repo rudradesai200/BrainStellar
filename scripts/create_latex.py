@@ -1,13 +1,13 @@
 import json
 
 PUZZLES_JSON = 'puzzles.json'
-TEX_FILE = '../tex/book.tex'
+TEX_FILE = 'book.tex'
 
 def create_latex_for_puzzle(puzzle: dict):
-    question = "\item %s\n\small\emph{(Category: %s)}\n" % (puzzle['Question'],puzzle['category'])
+    question = "\item \\textbf{%s}\n\n%s\n\small\emph{(Category: %s)}\n" % (puzzle['title'],puzzle['Question'],puzzle['category'])
     if "Hint" in puzzle.keys():
         question += "\n\small\emph{Hint: %s}\n\n" % (puzzle['Hint'])
-    
+
     solution = "\item"
     if puzzle.get('Answer', '') != '':
         solution += f"\nAnswer: {puzzle.get('Answer','')}\n "
@@ -17,7 +17,7 @@ def create_latex_for_puzzle(puzzle: dict):
 if __name__ == "__main__":
     fp = open(PUZZLES_JSON, "r")
     puzzles = json.load(fp)
-    
+
     qfp = open(TEX_FILE, "w")
     qfp.write(
 """\section{Questions}
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     solutions = []
     for i, puzzle in enumerate(puzzles):
         question, solution = create_latex_for_puzzle(puzzle)
-        qfp.write(f"% --------------------------  Question {i+1} starts  -------------------------- \n\n")
+        qfp.write(f"% --------------------------  Question {i+1} starts  --------------------------\n\n")
         qfp.write(question)
         qfp.write(f"% --------------------------  Question {i+1} ends    --------------------------\n\n\n\n")
         solutions.append(solution)
@@ -39,10 +39,10 @@ if __name__ == "__main__":
 """)
 
     for i, solution in enumerate(solutions):
-        qfp.write(f"% --------------------------  Question {i+1} starts  -------------------------- \n\n")
+        qfp.write(f"% --------------------------  Question {i+1} starts  --------------------------\n\n")
         qfp.write(solution)
         qfp.write(f"% --------------------------  Question {i+1} ends    --------------------------\n\n\n\n")
-    
+
     qfp.write("\end{enumerate}")
 
     fp.close()
